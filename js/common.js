@@ -43,13 +43,13 @@ kubikApp.controller('signupCtrl', ['$http', '$location', function ($http, $locat
 
 kubikApp.controller('taskCtrl', ['$http', '$location', function ($http, $location) {
     this.finish = false;
-    console.log('build:3');
+
     this.getTask = function () {
         if ($location.search().hasOwnProperty('t')) {
-            console.log('getTask');
             var token = $location.search()['t'];
             $http.get('http://api.kubikvest.xyz/task?t=' + token).then(function (res) {
                 this.task = res.data;
+                this.startTimer(this.task.timer);
             }.bind(this));
         }
     }
@@ -62,7 +62,6 @@ kubikApp.controller('taskCtrl', ['$http', '$location', function ($http, $locatio
             var token = $location.search()['t'];
             $http.get('http://api.kubikvest.xyz/checkpoint?t=' + token + '&c=' + lat + ',' + lng).then(function (res) {
                 this.task = res.data;
-                console.log(this.task);
                 if (!this.task.finish) {
                     $location.path('task');
                 } else {
@@ -73,9 +72,18 @@ kubikApp.controller('taskCtrl', ['$http', '$location', function ($http, $locatio
     }
 
     this.checkpoint = function () {
-        console.log('checkpoint');
         if (navigator.geolocation) navigator.geolocation.getCurrentPosition(this.onPositionUpdate.bind(this));
     };
+
+    this.startTimer = function ($remain) {
+        var duration = moment.duration($remain, 'milliseconds');
+        var interval = 1000;
+        setInterval(function(){
+            duration = moment.duration(duration.asMilliseconds() - interval, 'milliseconds');
+            this.timer = moment(duration.asMilliseconds()).format('mm:ss');
+            console.log(this.timer);
+        }.bind(this), interval);
+    }
 }]);
 
 kubikApp.controller('pointCtrl', ['$http', '$location', function ($http, $location) {
@@ -92,7 +100,6 @@ kubikApp.controller('pointCtrl', ['$http', '$location', function ($http, $locati
     };
 
     this.checkpoint = function () {
-        console.log(2222);
         if (navigator.geolocation) navigator.geolocation.getCurrentPosition(this.onPositionUpdate.bind(this));
     }
 }]);
