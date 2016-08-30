@@ -1,4 +1,4 @@
-var kubikApp = angular.module('kubikApp', ['ngRoute', 'ui.router'], function ($interpolateProvider) {
+var kubikApp = angular.module('kubikApp', ['ngRoute', 'ui.router', 'timer'], function ($interpolateProvider) {
     $interpolateProvider.startSymbol('{|').endSymbol('|}');
 });
 
@@ -41,15 +41,14 @@ kubikApp.controller('signupCtrl', ['$http', '$location', function ($http, $locat
     }
 }]);
 
-kubikApp.controller('taskCtrl', ['$http', '$location', function ($http, $location) {
+kubikApp.controller('taskCtrl', ['$http', '$location', '$scope', function ($http, $location, $scope) {
     this.finish = false;
-
     this.getTask = function () {
         if ($location.search().hasOwnProperty('t')) {
             var token = $location.search()['t'];
             $http.get('http://api.kubikvest.xyz/task?t=' + token).then(function (res) {
                 this.task = res.data;
-                this.startTimer(this.task.timer);
+                this.task.countdownVal = res.data.timer * 60;
             }.bind(this));
         }
     }
@@ -74,16 +73,6 @@ kubikApp.controller('taskCtrl', ['$http', '$location', function ($http, $locatio
     this.checkpoint = function () {
         if (navigator.geolocation) navigator.geolocation.getCurrentPosition(this.onPositionUpdate.bind(this));
     };
-
-    this.startTimer = function ($remain) {
-        var duration = moment.duration($remain, 'milliseconds');
-        var interval = 1000;
-        setInterval(function(){
-            duration = moment.duration(duration.asMilliseconds() - interval, 'milliseconds');
-            this.timer = moment(duration.asMilliseconds()).format('mm:ss');
-            console.log(this.timer);
-        }.bind(this), interval);
-    }
 }]);
 
 kubikApp.controller('pointCtrl', ['$http', '$location', function ($http, $location) {
