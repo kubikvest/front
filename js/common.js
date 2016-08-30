@@ -1,4 +1,4 @@
-var kubikApp = angular.module('kubikApp', ['ngRoute', 'ui.router'], function ($interpolateProvider) {
+var kubikApp = angular.module('kubikApp', ['ngRoute', 'ui.router', 'timer'], function ($interpolateProvider) {
     $interpolateProvider.startSymbol('{|').endSymbol('|}');
 });
 
@@ -41,15 +41,14 @@ kubikApp.controller('signupCtrl', ['$http', '$location', function ($http, $locat
     }
 }]);
 
-kubikApp.controller('taskCtrl', ['$http', '$location', function ($http, $location) {
+kubikApp.controller('taskCtrl', ['$http', '$location', '$scope', function ($http, $location, $scope) {
     this.finish = false;
-    console.log('build:3');
     this.getTask = function () {
         if ($location.search().hasOwnProperty('t')) {
-            console.log('getTask');
             var token = $location.search()['t'];
             $http.get('http://api.kubikvest.xyz/task?t=' + token).then(function (res) {
                 this.task = res.data;
+                this.task.countdownVal = res.data.timer * 60;
             }.bind(this));
         }
     }
@@ -62,7 +61,6 @@ kubikApp.controller('taskCtrl', ['$http', '$location', function ($http, $locatio
             var token = $location.search()['t'];
             $http.get('http://api.kubikvest.xyz/checkpoint?t=' + token + '&c=' + lat + ',' + lng).then(function (res) {
                 this.task = res.data;
-                console.log(this.task);
                 if (!this.task.finish) {
                     $location.path('task');
                 } else {
@@ -73,7 +71,6 @@ kubikApp.controller('taskCtrl', ['$http', '$location', function ($http, $locatio
     }
 
     this.checkpoint = function () {
-        console.log('checkpoint');
         if (navigator.geolocation) navigator.geolocation.getCurrentPosition(this.onPositionUpdate.bind(this));
     };
 }]);
@@ -92,7 +89,6 @@ kubikApp.controller('pointCtrl', ['$http', '$location', function ($http, $locati
     };
 
     this.checkpoint = function () {
-        console.log(2222);
         if (navigator.geolocation) navigator.geolocation.getCurrentPosition(this.onPositionUpdate.bind(this));
     }
 }]);
