@@ -1,0 +1,7 @@
+{
+    "name": "kubikvest.client",
+    "dependencies": {
+        "foundation-sites": "=v6.2.3",
+        "material-design-iconic-font": "=2.2.0"
+    }
+}
