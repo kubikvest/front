@@ -1,4 +1,4 @@
-var kubikApp = angular.module('kubikApp', ['ngRoute', 'ui.router'], function ($interpolateProvider) {
+var kubikApp = angular.module('kubikApp', ['ngRoute', 'ui.router', 'timer'], function ($interpolateProvider) {
     $interpolateProvider.startSymbol('{|').endSymbol('|}');
 });
 
@@ -38,21 +38,29 @@ kubikApp.controller('signupCtrl', ['$http', '$location', function ($http, $locat
             });
 
         }
-    }
+    };
 }]);
 
-kubikApp.controller('taskCtrl', ['$http', '$location', function ($http, $location) {
+kubikApp.controller('taskCtrl', ['$http', '$location', '$scope', '$timeout', function ($http, $location, $scope, $timeout) {
     this.finish = false;
+    this.$scope = $scope;
+    this.task = {
+        countdownVal: 0
+    };
 
     this.getTask = function () {
+        this.$scope.$broadcast('timer-reset');
         if ($location.search().hasOwnProperty('t')) {
             var token = $location.search()['t'];
             $http.get('http://api.kubikvest.xyz/task?t=' + token).then(function (res) {
                 this.task = res.data;
-                this.startTimer(this.task.timer);
+                this.task.countdownVal = res.data.timer * 60;
+                $timeout(function(){
+                    this.$scope.$broadcast('timer-start');
+                }.bind(this));
             }.bind(this));
         }
-    }
+    };
 
     this.onPositionUpdate = function (position) {
         var lat = position.coords.latitude;
@@ -69,21 +77,11 @@ kubikApp.controller('taskCtrl', ['$http', '$location', function ($http, $locatio
                 }
             }.bind(this));
         }
-    }
+    };
 
     this.checkpoint = function () {
         if (navigator.geolocation) navigator.geolocation.getCurrentPosition(this.onPositionUpdate.bind(this));
     };
-
-    this.startTimer = function ($remain) {
-        var duration = moment.duration($remain, 'milliseconds');
-        var interval = 1000;
-        setInterval(function(){
-            duration = moment.duration(duration.asMilliseconds() - interval, 'milliseconds');
-            this.timer = moment(duration.asMilliseconds()).format('mm:ss');
-            console.log(this.timer);
-        }.bind(this), interval);
-    }
 }]);
 
 kubikApp.controller('pointCtrl', ['$http', '$location', function ($http, $location) {
@@ -101,5 +99,5 @@ kubikApp.controller('pointCtrl', ['$http', '$location', function ($http, $locati
 
     this.checkpoint = function () {
         if (navigator.geolocation) navigator.geolocation.getCurrentPosition(this.onPositionUpdate.bind(this));
-    }
+    };
 }]);
