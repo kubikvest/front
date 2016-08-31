@@ -38,20 +38,29 @@ kubikApp.controller('signupCtrl', ['$http', '$location', function ($http, $locat
             });
 
         }
-    }
+    };
 }]);
 
-kubikApp.controller('taskCtrl', ['$http', '$location', '$scope', function ($http, $location, $scope) {
+kubikApp.controller('taskCtrl', ['$http', '$location', '$scope', '$timeout', function ($http, $location, $scope, $timeout) {
     this.finish = false;
+    this.$scope = $scope;
+    this.task = {
+        countdownVal: 0
+    };
+
     this.getTask = function () {
+        this.$scope.$broadcast('timer-reset');
         if ($location.search().hasOwnProperty('t')) {
             var token = $location.search()['t'];
             $http.get('http://api.kubikvest.xyz/task?t=' + token).then(function (res) {
                 this.task = res.data;
                 this.task.countdownVal = res.data.timer * 60;
+                $timeout(function(){
+                    this.$scope.$broadcast('timer-start');
+                }.bind(this));
             }.bind(this));
         }
-    }
+    };
 
     this.onPositionUpdate = function (position) {
         var lat = position.coords.latitude;
@@ -68,7 +77,7 @@ kubikApp.controller('taskCtrl', ['$http', '$location', '$scope', function ($http
                 }
             }.bind(this));
         }
-    }
+    };
 
     this.checkpoint = function () {
         if (navigator.geolocation) navigator.geolocation.getCurrentPosition(this.onPositionUpdate.bind(this));
@@ -90,5 +99,5 @@ kubikApp.controller('pointCtrl', ['$http', '$location', function ($http, $locati
 
     this.checkpoint = function () {
         if (navigator.geolocation) navigator.geolocation.getCurrentPosition(this.onPositionUpdate.bind(this));
-    }
+    };
 }]);
