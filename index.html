@@ -3,42 +3,5 @@ layout: default
 title: rere
 ---
 <article class="it-poster" data-ng-controller="signupCtrl as signup">
-    <div class="row" data-ng-init="signup.activate()">
-        <section class="large-12 small-12 columns main-content"
-                 data-ng-if="!signup.code">
-            <h3>
-                <a id="welcome-to-github-pages" class="anchor"
-                   href="#welcome-to-github-pages" aria-hidden="true"><span
-                    aria-hidden="true" class="octicon octicon-link"></span></a>Что
-                такое Кубик?</h3>
-            <p>Это квест - прогулка в реальном времени на открытом воздухе, где
-                задания и ответы приходят через мобильное приложение.
-                (приложение еще в разработке)</p>
-            <p>Всё, что тебе нужно для игры — телефон (смартфон или планшет),
-                подключенный к интернету.</p>
-            <p>Маршруты не длинные, чтобы вы обязательно взглянули на родной
-                город по-новому и не слишком утомились.</p>
-            <p>Наши квесты работают в любую погоду, в будние дни и в праздники,
-                в жару и холод.</p>
-            <p>Кубик - это атмосфера настоящего приключения, хороший способ
-                отлично провести время, посоревноваться и получить кучу
-                положительных эмоций!</p>
-            <div class="text-center">
-                <a class="raised-button ink"
-                   href="https://oauth.vk.com/authorize?client_id=5597353&scope=&redirect_uri=http://kubikvest.xyz&response_type=code">Начать игру</a>
-            </div>
-        </section>
-        <div class="large-12 small-12 columns" ui-view></div>
-        <section class="large-12 small-12 columns card end"
-                 data-ng-if="signup.code">
-            <h2 class="text-headline">Секундочку!</h2>
-            <p>Подождите, сейчас все появится.</p>
-        </section>
-
-        <footer class="large-12 small-12 columns site-footer">
-            <span class="site-footer-owner"><a
-                href="https://vk.com/kubik_kvest">Кубик - уличный квест.
-                Группа</a></span>
-        </footer>
-    </div>
+    <div class="large-12 small-12 columns" ui-view></div>
 </article>
