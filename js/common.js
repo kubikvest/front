@@ -55,6 +55,7 @@ kubikApp.controller('taskCtrl', ['$http', '$location', '$scope', '$timeout', fun
             $http.get('http://api.kubikvest.xyz/task?t=' + token).then(function (res) {
                 this.task = res.data;
                 this.task.countdownVal = res.data.timer * 60;
+                console.log(this.task);
                 $timeout(function(){
                     this.$scope.$broadcast('timer-start');
                 }.bind(this));
