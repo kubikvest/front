@@ -12,10 +12,18 @@
     <section class="large-12 small-12 columns card end"
              data-ng-if="!ctrl.task.error">
 
-
-        <div data-ng-if="!ctrl.task.links.finish">
+        <div data-ng-if="!ctrl.task.links.finish && ctrl.geolocation">
             <h2 class="text-headline">Секунду!</h2>
             <p>Проверим не потерялись ли вы.</p>
+        </div>
+
+        <div data-ng-if="!ctrl.geolocation">
+            <h2 class="text-headline">Включите локацию!</h2>
+            <p>По какой-то причине ваш браузер не передает вашу геолокацию.</p>
+            <div class="text-center">
+                <a class="raised-button ink large button"
+                   href="{| ctrl.task.links.task |}">Обратно к заданию</a>
+            </div>
         </div>
 
         <div data-ng-if="ctrl.task.links.finish">
