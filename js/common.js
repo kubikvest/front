@@ -134,11 +134,15 @@ kubikApp.controller('taskCtrl', ['$http', '$location', '$scope', '$timeout', fun
                 }
                 console.log(this.geolocationErr);
                 this.geolocation = false;
-            }.bind(this), function() {
+            }.bind(this),
+            function() {
                 this.geolocationErr = 'Hi there! we are trying to locate you but you have not answered the security question yet.\n\nPlease choose "Share My Location" to enable us to find you.';
                 console.log(this.geolocationErr);
                 this.geolocation = false;
-            }.bind(this), 7000, {maximumAge:10000, timeout:0}).bind(this);
+            }.bind(this),
+            7000,
+            {maximumAge:10000, timeout:0}
+        );
     };
 
 }]);
