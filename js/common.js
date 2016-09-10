@@ -83,7 +83,13 @@ kubikApp.controller('taskCtrl', ['$http', '$location', '$scope', '$timeout', fun
     this.checkpoint = function () {
         if (navigator.geolocation) {
             this.geolocation = true;
-            navigator.geolocation.getCurrentPosition(this.onPositionUpdate.bind(this));
+            navigator.geolocation.getCurrentPosition(
+                this.onPositionUpdate.bind(this),
+                function(error){
+                    console.log('geolocation off');
+                    this.geolocation = false;
+                }.bind(this)
+            );
         } else {
             console.log('geolocation off');
             this.geolocation = false;
