@@ -81,7 +81,12 @@ kubikApp.controller('taskCtrl', ['$http', '$location', '$scope', '$timeout', fun
     };
 
     this.checkpoint = function () {
-        if (navigator.geolocation) navigator.geolocation.getCurrentPosition(this.onPositionUpdate.bind(this));
+        if (navigator.geolocation) {
+            this.geolocation = true;
+            navigator.geolocation.getCurrentPosition(this.onPositionUpdate.bind(this));
+        } else {
+            this.geolocation = false;
+        }
     };
 }]);
 
