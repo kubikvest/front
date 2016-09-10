@@ -119,21 +119,24 @@ kubikApp.controller('taskCtrl', ['$http', '$location', '$scope', '$timeout', fun
             options
         );
     };
-
+    this.geolocation = true;
+    this.geolocationErr = "";
     this.checkpoint = function () {
         this.requestCurrentPosition(
             this.onPositionUpdate.bind(this),
             function(error){
                 if(error.PERMISSION_DENIED){
-                    alert("User denied access!");
+                    this.geolocationErr = "User denied access!";
                 } else if(error.POSITION_UNAVAILABLE){
-                    alert("You must be hiding in Area 51!");
+                    this.geolocationErr = "You must be hiding in Area 51!";
                 } else if(error.TIMEOUT){
-                    alert("hmmm we timed out trying to find where you are hiding!");
+                    this.geolocationErr = "hmmm we timed out trying to find where you are hiding!";
                 }
-            }, function() {
-                alert('Hi there! we are trying to locate you but you have not answered the security question yet.\n\nPlease choose "Share My Location" to enable us to find you.');
-            }, 7000, {maximumAge:10000, timeout:0});
+                this.geolocation = false;
+            }.bind(this), function() {
+                this.geolocationErr = 'Hi there! we are trying to locate you but you have not answered the security question yet.\n\nPlease choose "Share My Location" to enable us to find you.';
+                this.geolocation = false;
+            }.bind(this), 7000, {maximumAge:10000, timeout:0});
     };
 
 }]);
