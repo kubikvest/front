@@ -80,7 +80,7 @@ kubikApp.controller('taskCtrl', ['$http', '$location', '$scope', '$timeout', fun
         }
     };
 
-    this.checkpoint = function () {
+    /*this.checkpoint = function () {
         if (navigator.geolocation) {
             this.geolocation = true;
             navigator.geolocation.getCurrentPosition(
@@ -94,7 +94,48 @@ kubikApp.controller('taskCtrl', ['$http', '$location', '$scope', '$timeout', fun
             console.log('geolocation off');
             this.geolocation = false;
         }
+    };*/
+
+    this.requestCurrentPosition = function(successCB, errorCB, timeoutCB, timeoutThreshold, options){
+        var successHandler = successCB;
+        var errorHandler = errorCB;
+        window.geolocationTimeoutHandler = function(){
+            timeoutCB();
+        };
+        if(typeof(geolocationRequestTimeoutHandler) != 'undefined'){
+            clearTimeout(window['geolocationRequestTimeoutHandler']);
+        }
+        var timeout = timeoutThreshold || 30000;
+        window['geolocationRequestTimeoutHandler'] = setTimeout('geolocationTimeoutHandler()', timeout);
+        navigator.geolocation.getCurrentPosition(
+            function(position){
+                clearTimeout(window['geolocationRequestTimeoutHandler']);
+                successHandler(position);
+            },
+            function(error){
+                clearTimeout(window['geolocationRequestTimeoutHandler']);
+                errorHandler(error);
+            },
+            options
+        );
     };
+
+    this.checkpoint = function () {
+        this.requestCurrentPosition(
+            this.onPositionUpdate.bind(this),
+            function(error){
+                if(error.PERMISSION_DENIED){
+                    alert("User denied access!");
+                } else if(error.POSITION_UNAVAILABLE){
+                    alert("You must be hiding in Area 51!");
+                } else if(error.TIMEOUT){
+                    alert("hmmm we timed out trying to find where you are hiding!");
+                }
+            }, function() {
+                alert('Hi there! we are trying to locate you but you have not answered the security question yet.\n\nPlease choose "Share My Location" to enable us to find you.');
+            }, 7000, {maximumAge:10000, timeout:0});
+    };
+
 }]);
 
 kubikApp.controller('pointCtrl', ['$http', '$location', function ($http, $location) {
