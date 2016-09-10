@@ -44,6 +44,9 @@ kubikApp.controller('signupCtrl', ['$http', '$location', function ($http, $locat
 kubikApp.controller('taskCtrl', ['$http', '$location', '$scope', '$timeout', function ($http, $location, $scope, $timeout) {
     this.finish = false;
     this.$scope = $scope;
+    this.geolocationWork = true;
+    this.geolocationErr = "";
+
     this.task = {
         countdownVal: 0
     };
@@ -119,8 +122,7 @@ kubikApp.controller('taskCtrl', ['$http', '$location', '$scope', '$timeout', fun
             options
         );
     };
-    this.geolocation = true;
-    this.geolocationErr = "";
+
     this.checkpoint = function () {
         this.requestCurrentPosition(
             this.onPositionUpdate.bind(this),
@@ -134,12 +136,12 @@ kubikApp.controller('taskCtrl', ['$http', '$location', '$scope', '$timeout', fun
                     this.geolocationErr = "hmmm we timed out trying to find where you are hiding!";
                 }
                 console.log(this.geolocationErr);
-                this.geolocation = false;
+                this.geolocationWork = false;
             }.bind(this),
             function() {
                 this.geolocationErr = 'Hi there! we are trying to locate you but you have not answered the security question yet.\n\nPlease choose "Share My Location" to enable us to find you.';
                 console.log(this.geolocationErr);
-                this.geolocation = false;
+                this.geolocationWork = false;
             }.bind(this),
             7000,
             {maximumAge:10000, timeout:0}
