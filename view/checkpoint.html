@@ -20,6 +20,7 @@
         <div data-ng-if="!ctrl.geolocation">
             <h2 class="text-headline">Включите локацию!</h2>
             <p>{| ctrl.geolocationErr |} По какой-то причине ваш браузер не передает вашу геолокацию.</p>
+            <p>{| ctrl.task.geolocationErr |}</p>
             <div class="text-center">
                 <a class="raised-button ink large button"
                    href="{| ctrl.task.links.task |}">Обратно к заданию {| ctrl.task.title |}</a>
