@@ -137,6 +137,7 @@ kubikApp.controller('taskCtrl', [
         };
 
         this.checkpoint = function () {
+            console.log('go to checkpoint');
             this.requestCurrentPosition(
                 this.onPositionUpdate.bind(this),
                 function (error) {
