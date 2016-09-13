@@ -112,7 +112,7 @@ kubikApp.controller('taskCtrl', [
          }
          };*/
 
-        this.requestCurrentPosition = function (successHandler, errorHandler, timeoutCB, timeoutThreshold, options) {
+        this.requestCurrentPosition = function (successHandler, errorHandler, timeoutCB, timeoutThreshold) {
             window.geolocationTimeoutHandler = function () {
                 timeoutCB();
             };
@@ -123,7 +123,6 @@ kubikApp.controller('taskCtrl', [
             window['geolocationRequestTimeoutHandler'] = setTimeout('geolocationTimeoutHandler()', timeout);
             navigator.geolocation.getCurrentPosition(
                 function (position) {
-                    console.log('position', position);
                     clearTimeout(window['geolocationRequestTimeoutHandler']);
                     successHandler(position);
                 },
@@ -161,7 +160,6 @@ kubikApp.controller('taskCtrl', [
                     this.geolocationErr = message;
                     this.task.geolocationErr = message;
                     this.geolocationWork = false;
-                    console.log(123123123, this);
                     $scope.$applyAsync();
                 }.bind(this),
                 7000,
