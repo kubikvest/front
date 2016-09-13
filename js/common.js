@@ -112,17 +112,15 @@ kubikApp.controller('taskCtrl', [
          }
          };*/
 
-        this.requestCurrentPosition = function (successCB, errorCB, timeoutCB, timeoutThreshold, options) {
-            var successHandler = successCB;
-            var errorHandler = errorCB;
-            window.geolocationTimeoutHandler = function () {
+        this.requestCurrentPosition = function (successHandler, errorHandler, timeoutCB, timeoutThreshold, options) {
+            /*window.geolocationTimeoutHandler = function () {
                 timeoutCB();
             };
             if (typeof(geolocationRequestTimeoutHandler) != 'undefined') {
                 clearTimeout(window['geolocationRequestTimeoutHandler']);
             }
             var timeout = timeoutThreshold || 30000;
-            window['geolocationRequestTimeoutHandler'] = setTimeout('geolocationTimeoutHandler()', timeout);
+            window['geolocationRequestTimeoutHandler'] = setTimeout('geolocationTimeoutHandler()', timeout);*/
             navigator.geolocation.getCurrentPosition(
                 function (position) {
                     clearTimeout(window['geolocationRequestTimeoutHandler']);
@@ -142,7 +140,6 @@ kubikApp.controller('taskCtrl', [
                 this.onPositionUpdate.bind(this),
                 function (error) {
                     console.log(error);
-                    console.log(this);
                     switch (error.code) {
                         case error.PERMISSION_DENIED:
                             this.geolocationErr = "User denied access!";
@@ -158,12 +155,11 @@ kubikApp.controller('taskCtrl', [
                     $scope.$applyAsync();
                 }.bind(this),
                 function () {
-                    this.geolocationErr = 'Hi there! we are trying to locate you but you have '
+                    var message = 'Hi there! we are trying to locate you but you have '
                         + 'not answered the security question yet.\n\n'
                         + 'Please choose "Share My Location" to enable us to find you.';
-                    this.task.geolocationErr = 'Hi there! we are trying to locate you but you have not '
-                        + 'answered the security question yet.\n\n'
-                        + 'Please choose "Share My Location" to enable us to find you.';
+                    this.geolocationErr = message;
+                    this.task.geolocationErr = message;
                     this.geolocationWork = false;
                     console.log(123123123, this);
                     $scope.$applyAsync();
