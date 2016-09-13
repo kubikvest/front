@@ -113,14 +113,14 @@ kubikApp.controller('taskCtrl', [
          };*/
 
         this.requestCurrentPosition = function (successHandler, errorHandler, timeoutCB, timeoutThreshold, options) {
-            /*window.geolocationTimeoutHandler = function () {
+            window.geolocationTimeoutHandler = function () {
                 timeoutCB();
             };
             if (typeof(geolocationRequestTimeoutHandler) != 'undefined') {
                 clearTimeout(window['geolocationRequestTimeoutHandler']);
             }
             var timeout = timeoutThreshold || 30000;
-            window['geolocationRequestTimeoutHandler'] = setTimeout('geolocationTimeoutHandler()', timeout);*/
+            window['geolocationRequestTimeoutHandler'] = setTimeout('geolocationTimeoutHandler()', timeout);
             navigator.geolocation.getCurrentPosition(
                 function (position) {
                     console.log('position', position);
