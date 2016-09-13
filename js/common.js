@@ -128,6 +128,7 @@ kubikApp.controller('taskCtrl', ['$http', '$location', '$scope', '$timeout', fun
             this.onPositionUpdate.bind(this),
             function(error){
                 console.log(error);
+                console.log(this);
                 /*if(error.PERMISSION_DENIED){
                     this.geolocationErr = "User denied access!";
                 } else if(error.POSITION_UNAVAILABLE){
