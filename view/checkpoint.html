@@ -12,12 +12,12 @@
     <section class="large-12 small-12 columns card end"
              data-ng-if="!ctrl.task.error">
 
-        <div data-ng-if="!ctrl.task.links.finish && ctrl.geolocation">
+        <div data-ng-if="!ctrl.task.links.finish && ctrl.geolocationWork">
             <h2 class="text-headline">Секунду!</h2>
             <p>Проверим не потерялись ли вы.</p>
         </div>
 
-        <div data-ng-if="!ctrl.geolocation">
+        <div data-ng-if="!ctrl.geolocationWork">
             <h2 class="text-headline">Включите локацию!</h2>
             <p>{| ctrl.geolocationErr |} По какой-то причине ваш браузер не передает вашу геолокацию1111.</p>
             <p>{| ctrl.task.geolocationErr |}</p>
