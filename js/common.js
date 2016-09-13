@@ -33,7 +33,7 @@ kubikApp.controller('signupCtrl', ['$http', '$location', function ($http, $locat
         if ($location.search().hasOwnProperty('code')) {
             this.code = true;
             var code = $location.search()['code'];
-            $http.get('http://api.kubikvest.xyz/auth?code=' + code).then(function (res) {
+            $http.get('https://api.kubikvest.xyz/auth?code=' + code).then(function (res) {
                 window.location = res.data.links.task;
             });
 
@@ -55,7 +55,7 @@ kubikApp.controller('taskCtrl', ['$http', '$location', '$scope', '$timeout', fun
         this.$scope.$broadcast('timer-reset');
         if ($location.search().hasOwnProperty('t')) {
             var token = $location.search()['t'];
-            $http.get('http://api.kubikvest.xyz/task?t=' + token).then(function (res) {
+            $http.get('https://api.kubikvest.xyz/task?t=' + token).then(function (res) {
                 this.task = res.data;
                 this.task.countdownVal = res.data.timer * 60;
                 console.log(this.task);
@@ -72,7 +72,7 @@ kubikApp.controller('taskCtrl', ['$http', '$location', '$scope', '$timeout', fun
 
         if ($location.search().hasOwnProperty('t')) {
             var token = $location.search()['t'];
-            $http.get('http://api.kubikvest.xyz/checkpoint?t=' + token + '&c=' + lat + ',' + lng).then(function (res) {
+            $http.get('https://api.kubikvest.xyz/checkpoint?t=' + token + '&c=' + lat + ',' + lng).then(function (res) {
                 this.task = res.data;
                 if (!this.task.finish) {
                     $location.path('task');
@@ -158,7 +158,7 @@ kubikApp.controller('pointCtrl', ['$http', '$location', function ($http, $locati
 
         if ($location.search().hasOwnProperty('t')) {
             var token = $location.search()['t'];
-            $http.get('http://api.kubikvest.xyz/checkpoint?t=' + token + '&c=' + lat + ',' + lng).then(function (res) {
+            $http.get('https://api.kubikvest.xyz/checkpoint?t=' + token + '&c=' + lat + ',' + lng).then(function (res) {
                 this.task = res.data;
             }.bind(this));
         }
