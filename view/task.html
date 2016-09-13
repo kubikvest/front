@@ -9,11 +9,14 @@
            href="{| ctrl.task.links.checkpoint |}">Я на месте</a>
     </div>
     <div class="text-center">
-        <h3><timer countdown="ctrl.task.countdownVal"
+        <h3>
+            <timer countdown="ctrl.task.countdownVal"
                    interval="1000"
                    finish-callback="ctrl.getTask()"
                    autostart="false"
-                   data-ng-if="ctrl.task.countdownVal">{| mminutes |}:{| sseconds |}</timer></h3>
+                   data-ng-if="ctrl.task.countdownVal">{| mminutes |}:{| sseconds |}
+            </timer>
+        </h3>
     </div>
     <div class="text-center"
          data-ng-if="ctrl.task.prompt">
