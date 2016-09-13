@@ -2,7 +2,7 @@ var kubikApp = angular.module('kubikApp', ['ui.router', 'timer'], function ($int
     $interpolateProvider.startSymbol('{|').endSymbol('|}');
 });
 
-kubikApp.config(function($routeProvider, $locationProvider) {
+kubikApp.config(function($locationProvider) {
     $locationProvider.html5Mode(true);
 });
 
