@@ -1,8 +1,8 @@
-var kubikApp = angular.module('kubikApp', ['ui.router', 'timer'], function ($interpolateProvider) {
+var kubikApp = angular.module('kubikApp', ['ngRoute', 'ui.router', 'timer'], function ($interpolateProvider) {
     $interpolateProvider.startSymbol('{|').endSymbol('|}');
 });
 
-kubikApp.config(function($locationProvider) {
+kubikApp.config(function($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
 });
 
@@ -136,7 +136,7 @@ kubikApp.controller('taskCtrl', ['$http', '$location', '$scope', '$timeout', fun
                 } else if(error.TIMEOUT){
                     this.geolocationErr = "hmmm we timed out trying to find where you are hiding!";
                 }*/
-                this.task.geolocationErr = 'sdfsdfsdf';
+                this.geolocationErr = 'sdfsdfsdf';
                 this.geolocationWork = false;
                 $scope.$applyAsync();
             }.bind(this),
