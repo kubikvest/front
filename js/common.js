@@ -126,6 +126,10 @@ kubikApp.controller('taskCtrl', [
                     console.log('position', position);
                     clearTimeout(window['geolocationRequestTimeoutHandler']);
                     successHandler(position);
+                },
+                function (error) {
+                    clearTimeout(window['geolocationRequestTimeoutHandler']);
+                    errorHandler(error);
                 }
             );
         };
