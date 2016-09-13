@@ -123,14 +123,10 @@ kubikApp.controller('taskCtrl', [
             window['geolocationRequestTimeoutHandler'] = setTimeout('geolocationTimeoutHandler()', timeout);*/
             navigator.geolocation.getCurrentPosition(
                 function (position) {
+                    console.log('position', position);
                     clearTimeout(window['geolocationRequestTimeoutHandler']);
                     successHandler(position);
-                },
-                function (error) {
-                    clearTimeout(window['geolocationRequestTimeoutHandler']);
-                    errorHandler(error);
-                },
-                options
+                }
             );
         };
 
