@@ -128,13 +128,13 @@ kubikApp.controller('taskCtrl', ['$http', '$location', '$scope', '$timeout', fun
             this.onPositionUpdate.bind(this),
             function(error){
                 console.log(error);
-                if(error.PERMISSION_DENIED){
+                /*if(error.PERMISSION_DENIED){
                     this.geolocationErr = "User denied access!";
                 } else if(error.POSITION_UNAVAILABLE){
                     this.geolocationErr = "You must be hiding in Area 51!";
                 } else if(error.TIMEOUT){
                     this.geolocationErr = "hmmm we timed out trying to find where you are hiding!";
-                }
+                }*/
                 this.geolocationWork = false;
                 $scope.$applyAsync();
             }.bind(this),
