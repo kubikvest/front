@@ -135,6 +135,7 @@ kubikApp.controller('taskCtrl', ['$http', '$location', '$scope', '$timeout', fun
                 } else if(error.TIMEOUT){
                     this.geolocationErr = "hmmm we timed out trying to find where you are hiding!";
                 }*/
+                this.geolocationErr = 'sdfsdfsdf';
                 this.geolocationWork = false;
                 $scope.$applyAsync();
             }.bind(this),
