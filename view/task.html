@@ -4,9 +4,14 @@
         <p>{| ctrl.task.description |}</p>
     </section>
     <div class="text-center"
-         data-ng-if="!ctrl.task.finish">
+         data-ng-if="!ctrl.task.finish && ctrl.task.point_id == 0">
         <a class="raised-button ink large button"
            href="{| ctrl.task.links.checkpoint |}">Я на месте</a>
+    </div>
+    <div class="text-center"
+         data-ng-if="!ctrl.task.finish && ctrl.task.point_id != 0">
+        <a class="raised-button ink large button"
+           href="{| ctrl.task.links.checkpoint |}">Проверить ответ</a>
     </div>
     <div class="text-center">
         <h3>
