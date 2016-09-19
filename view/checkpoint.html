@@ -1,0 +1,43 @@
+<div class="row" data-ng-init="ctrl.checkpoint()">
+    <div class="text-center callout secondary"
+         data-ng-if="ctrl.task.error">
+        <p>{| ctrl.task.error |}</p>
+        <h4 class="subheader">попытайтесь еще раз</h4>
+        <p>Не плакать!</p>
+        <div class="text-center">
+            <a class="raised-button ink large button"
+               href="{| ctrl.task.links.task |}">Обратно к заданию</a>
+        </div>
+    </div>
+    <section class="large-12 small-12 columns card end"
+             data-ng-if="!ctrl.task.error">
+
+        <div data-ng-if="!ctrl.task.links.finish && ctrl.geolocationWork">
+            <h2 class="text-headline">Секунду!</h2>
+            <p>Проверим не потерялись ли вы.</p>
+        </div>
+
+        <div data-ng-if="!ctrl.geolocationWork">
+            <h2 class="text-headline">Включите локацию!</h2>
+            <p>{| ctrl.geolocationErr |} По какой-то причине ваш браузер не передает вашу геолокацию1111.</p>
+            <p>{| ctrl.task.geolocationErr |}</p>
+            <div class="text-center">
+                <a class="raised-button ink large button"
+                   href="{| ctrl.task.links.task |}">Обратно к заданию {| ctrl.task.title |}</a>
+            </div>
+        </div>
+
+        <div data-ng-if="ctrl.task.links.finish">
+            <h2 class="text-headline">Поздравляем с успешным прохождением!</h2>
+            <p>Скажи что понравилось, а что нет, вместе сделаем игру лучше!</p>
+            <div class="text-center"
+                 data-ng-if="ctrl.task.links.finish">
+                <a class="raised-button ink large button"
+                   href="{| ctrl.task.links.finish |}">Мои результаты</a>
+            </div>
+        </div>
+
+
+
+    </section>
+</div>

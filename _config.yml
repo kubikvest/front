@@ -1,0 +1,9 @@
+title: Кубик - уличный квест
+url: https://kubikvest.xyz
+enforce_ssl: kubikvest.xyz
+
+sass:
+  sass_dir: _scss
+  style:    :compressed
+
+exclude: [bower_components, node_modules]

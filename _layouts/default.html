@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html class="no-js"
+      lang="ru"
+      itemscope
+      itemtype="http://schema.org/Product">
+{% include head.html %}
+<body>
+<script type="text/javascript">
+    var host = "kubikvest.xyz";
+    if ((host == window.location.host) && (window.location.protocol != "https:")) {
+        window.location.protocol = "https";
+    }
+</script>
+<header class="it-header">
+    <div class="row">
+        <div class="hide-for-small-only medium-12 large-12 columns">
+            <h1 class="text-center">Кубик - уличный квест</h1>
+        </div>
+        <div class="top-bar show-for-small-only">
+            <div class="top-bar-left no-collapse">
+                <ul role="menubar" class="menu">
+                    <li role="menuitem" class="menu-text text-title">Кубик - уличный квест</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+{{ content }}
+<footer class="it-footer">
+</footer>
+<script src="/js/common.js" type="text/javascript"></script>
+</body>
+</html>
