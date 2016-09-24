@@ -13,6 +13,10 @@
             </div>
         </div>
     </header>
+    <section class="large-12 small-12 columns card end"
+             data-ng-if="!ctrl.task.finish && ctrl.task.point_id == 0">
+        <p>{| ctrl.task.quest.description |}</p>
+    </section>
     <section class="large-12 small-12 columns card end">
         <h2 class="text-headline">{| ctrl.task.point.title |}</h2>
         <p>{| ctrl.task.point.description |}</p>
