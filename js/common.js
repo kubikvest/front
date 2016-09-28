@@ -167,6 +167,15 @@ kubikApp.controller('taskCtrl', [
             );
         };
 
+        this.getFinish = function () {
+            if ($location.search().hasOwnProperty('t')) {
+                var token = $location.search()['t'];
+                $http.get('https://api.kubikvest.xyz/finish?t=' + token)
+                    .then(function (res) {
+                        this.task = res.data;
+                    }.bind(this));
+            }
+        };
     }
 ]);
 
