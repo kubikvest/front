@@ -18,7 +18,7 @@
              data-ng-repeat="quest in ctrl.quests">
             <a class="raised-button ink large button"
                data-ng-click="ctrl.changeQuest(quest.questId)">{| quest.title |}</a>
-            <p>{| quest.description |}</p>
+            <p>{| quest.description |} {| quest.questId |}</p>
         </div>
     </section>
 </div>
