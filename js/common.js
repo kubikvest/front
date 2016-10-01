@@ -126,22 +126,6 @@ kubikApp.controller('taskCtrl', [
             }
         };
 
-        /*this.checkpoint = function () {
-         if (navigator.geolocation) {
-         this.geolocation = true;
-         navigator.geolocation.getCurrentPosition(
-         this.onPositionUpdate.bind(this),
-         function(error){
-         console.log('geolocation off');
-         this.geolocation = false;
-         }.bind(this)
-         );
-         } else {
-         console.log('geolocation off');
-         this.geolocation = false;
-         }
-         };*/
-
         this.requestCurrentPosition = function (successHandler, errorHandler, timeoutCB, timeoutThreshold) {
             window.geolocationTimeoutHandler = function () {
                 timeoutCB();
@@ -204,29 +188,6 @@ kubikApp.controller('taskCtrl', [
                     .then(function (res) {
                         this.task = res.data;
                     }.bind(this));
-            }
-        };
-    }
-]);
-
-kubikApp.controller('pointCtrl', [
-    '$http', '$location', function ($http, $location) {
-        this.onPositionUpdate = function (position) {
-            var lat = position.coords.latitude,
-                lng = position.coords.longitude;
-
-            if ($location.search().hasOwnProperty('t')) {
-                var token = $location.search()['t'];
-                $http.get('https://api.kubikvest.xyz/checkpoint?t=' + token + '&c=' + lat + ',' + lng)
-                    .then(function (res) {
-                        this.task = res.data;
-                    }.bind(this));
-            }
-        };
-
-        this.checkpoint = function () {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(this.onPositionUpdate.bind(this));
             }
         };
     }
