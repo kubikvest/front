@@ -17,7 +17,7 @@
         <div class="text-center"
              data-ng-repeat="quest in ctrl.quests">
             <a class="raised-button ink large button"
-               href="{| quest.link |}">{| quest.title |}</a>
+               data-ng-click="ctrl.changeQuest(quest.questId)">{| quest.title |}</a>
             <p>{| quest.description |}</p>
         </div>
     </section>

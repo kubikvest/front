@@ -58,14 +58,23 @@ kubikApp.controller('signupCtrl', [
 
 kubikApp.controller('listQuestCtrl', ['$http', '$location', function ($http, $location) {
     this.quests = [];
+    this.token = '';
     this.getListQuest = function () {
         if ($location.search().hasOwnProperty('t')) {
             var token = $location.search()['t'];
             $http.get('https://api.kubikvest.xyz/list-quest?t=' + token).then(function (res) {
                 this.quests = res.data.quests;
-                console.log(this.quests);
+                this.token  = res.data.t;
             }.bind(this));
         }
+    };
+    this.changeQuest = function ($questId) {
+        $http.post('https://api.kubikvest.xyz/create-game', {
+            t: this.token,
+            quest_id: $questId
+        }).then(function (res) {
+            console.log(res.data);
+        }.bind(this));
     };
 }]);
 
