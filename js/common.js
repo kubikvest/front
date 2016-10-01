@@ -56,18 +56,16 @@ kubikApp.controller('signupCtrl', [
     }
 ]);
 
-kubikApp.controller('listQuestCtrl', [
-    '$http', '$location', function ($http, $location) {
-        this.getListQuest = function () {
-            if ($location.search().hasOwnProperty('t')) {
-                var token = $location.search()['t'];
-                $http.get('https://api.kubikvest.xyz/list-quest?t=' + token).then(function (res) {
-                    console.log(res.data);
-                }.bind(this));
-            }
-        };
-    }
-]);
+kubikApp.controller('listQuestCtrl', ['$http', '$location', function ($http, $location) {
+    this.getListQuest = function () {
+        if ($location.search().hasOwnProperty('t')) {
+            var token = $location.search()['t'];
+            $http.get('https://api.kubikvest.xyz/list-quest?t=' + token).then(function (res) {
+                this.quests = res.data.quests;
+            }.bind(this));
+        }
+    };
+}]);
 
 kubikApp.controller('taskCtrl', [
     '$http', '$location', '$scope', '$timeout', function ($http, $location, $scope, $timeout) {

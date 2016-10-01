@@ -1,3 +1,24 @@
 <div class="row" data-ng-init="ctrl.getListQuest()">
-    Список квестов
+    <header class="it-header">
+        <div class="row">
+            <div class="hide-for-small-only medium-12 large-12 columns">
+                <h1 class="text-center">Список квестов</h1>
+            </div>
+            <div class="top-bar show-for-small-only">
+                <div class="top-bar-left no-collapse">
+                    <ul role="menubar" class="menu">
+                        <li role="menuitem" class="menu-text text-title">Выберите для начала игры</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="large-12 small-12 columns card end">
+        <div class="text-center"
+             data-ng-repeat="quest in ctrl.quests">
+            <a class="raised-button ink large button"
+               href="{| quest.link |}">{| quest.title |}</a>
+            <p>{| quest.description |}</p>
+        </div>
+    </section>
 </div>
