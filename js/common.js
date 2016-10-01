@@ -68,10 +68,11 @@ kubikApp.controller('listQuestCtrl', ['$http', '$location', function ($http, $lo
             }.bind(this));
         }
     };
-    this.changeQuest = function ($questId) {
+    this.changeQuest = function (questId) {
+        console.log(questId);
         $http.post('https://api.kubikvest.xyz/create-game', {
             t: this.token,
-            quest_id: $questId
+            quest_id: questId
         }).then(function (res) {
             console.log(res.data);
         }.bind(this));
