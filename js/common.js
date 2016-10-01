@@ -74,7 +74,7 @@ kubikApp.controller('listQuestCtrl', ['$http', '$location', function ($http, $lo
             t: this.token,
             quest_id: questId
         }).then(function (res) {
-            console.log(res.data);
+            window.location = res.data.links.task;
         }.bind(this));
     };
 }]);
@@ -111,8 +111,11 @@ kubikApp.controller('taskCtrl', [
 
             if ($location.search().hasOwnProperty('t')) {
                 var token = $location.search()['t'];
-                $http.get('https://api.kubikvest.xyz/checkpoint?t=' + token + '&c=' + lat + ',' + lng)
-                    .then(function (res) {
+                $http.post('https://api.kubikvest.xyz/checkpoint', {
+                    t: this.task.t,
+                    lat: lat,
+                    log: lng
+                }).then(function (res) {
                         this.task = res.data;
                         if (!this.task.finish) {
                             $location.path('task');
