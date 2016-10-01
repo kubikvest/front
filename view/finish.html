@@ -3,6 +3,11 @@
         <div>
             <h2 class="text-headline">Результаты</h2>
             <p>Вы заняли первое место.</p>
+            <div class="text-center"
+                 data-ng-if="ctrl.task.links.finish">
+                <a class="raised-button ink large button"
+                   href="{{ site.url }}">Вернуться в начало</a>
+            </div>
         </div>
     </section>
 </div>
