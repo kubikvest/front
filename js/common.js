@@ -20,6 +20,10 @@ kubikApp.config(
                     url: "/",
                     templateUrl: "view/index.html"
                 })
+                .state('list-quest', {
+                    url: '/list-quest',
+                    templateUrl: "view/list-quest.html"
+                })
                 .state('task', {
                     url: '/task',
                     templateUrl: "view/task.html"
@@ -47,6 +51,19 @@ kubikApp.controller('signupCtrl', [
                     window.location = res.data.links.list_quest;
                 });
 
+            }
+        };
+    }
+]);
+
+kubikApp.controller('listQuestCtrl', [
+    '$http', '$location', function ($http, $location) {
+        this.getListQuest = function () {
+            if ($location.search().hasOwnProperty('t')) {
+                var token = $location.search()['t'];
+                $http.get('https://api.kubikvest.xyz/list-quest?t=' + token).then(function (res) {
+                    console.log(res.data);
+                }.bind(this));
             }
         };
     }
