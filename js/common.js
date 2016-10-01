@@ -57,11 +57,13 @@ kubikApp.controller('signupCtrl', [
 ]);
 
 kubikApp.controller('listQuestCtrl', ['$http', '$location', function ($http, $location) {
+    this.quests = [];
     this.getListQuest = function () {
         if ($location.search().hasOwnProperty('t')) {
             var token = $location.search()['t'];
             $http.get('https://api.kubikvest.xyz/list-quest?t=' + token).then(function (res) {
                 this.quests = res.data.quests;
+                console.log(this.quests);
             }.bind(this));
         }
     };
