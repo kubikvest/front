@@ -119,7 +119,7 @@ kubikApp.controller('taskCtrl', [
                 $http.post('https://api.kubikvest.xyz/checkpoint', {
                     t: this.task.t,
                     lat: lat,
-                    log: lng
+                    lng: lng
                 }).then(function (res) {
                         this.task = res.data;
                         if (!this.task.finish) {
