@@ -113,13 +113,15 @@ kubikApp.controller('taskCtrl', [
         this.onPositionUpdate = function (position) {
             var lat = position.coords.latitude;
             var lng = position.coords.longitude;
+            var acr = position.coords.accuracy;
 
             if ($location.search().hasOwnProperty('t')) {
                 var token = $location.search()['t'];
                 $http.post('https://api.kubikvest.xyz/checkpoint', {
                     t: this.task.t,
                     lat: lat,
-                    lng: lng
+                    lng: lng,
+                    acr: acr
                 }).then(function (res) {
                         this.task = res.data;
                         if (!this.task.finish) {
