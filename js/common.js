@@ -91,6 +91,7 @@ kubikApp.controller('taskCtrl', [
         this.geolocationWork = true;
         this.geolocationErr = "";
         this.checkoutAttempt = 0;
+        this.geolocationId = null;
         this.task = {
             countdownVal: 0
         };
@@ -124,7 +125,7 @@ kubikApp.controller('taskCtrl', [
                     acr: acr
                 }).then(function (res) {
                     if (this.checkoutAttempt <= 0) {
-                        navigator.geolocation.clearWatch();
+                        navigator.geolocation.clearWatch(this.geolocationId);
                         this.checkoutAttempt = 0;
                     }
                     this.checkoutAttempt--;
@@ -147,7 +148,7 @@ kubikApp.controller('taskCtrl', [
             }
             var timeout = timeoutThreshold || 30000;
             window['geolocationRequestTimeoutHandler'] = setTimeout('geolocationTimeoutHandler()', timeout);
-            navigator.geolocation.watchPosition(
+            this.geolocationId = navigator.geolocation.watchPosition(
                 function (position) {
                     clearTimeout(window['geolocationRequestTimeoutHandler']);
                     successHandler(position);
