@@ -124,13 +124,12 @@ kubikApp.controller('taskCtrl', [
                     lng: lng,
                     acr: acr
                 }).then(function (res) {
-                    console.info('Start:', this.checkoutAttempt);
                     if (this.checkoutAttempt <= 0) {
                         navigator.geolocation.clearWatch(this.geolocationId);
                         this.checkoutAttempt = 0;
+                    } else {
+                        this.checkoutAttempt--;
                     }
-                    this.checkoutAttempt--;
-                    console.info('End:', this.checkoutAttempt);
                     this.task = res.data;
                     if (!this.task.finish) {
                         $location.path('task');
