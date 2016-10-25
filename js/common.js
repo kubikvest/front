@@ -90,7 +90,7 @@ kubikApp.controller('taskCtrl', [
         this.$scope = $scope;
         this.geolocationWork = true;
         this.geolocationErr = "";
-
+        this.checkoutAttempt = 0;
         this.task = {
             countdownVal: 0
         };
@@ -123,13 +123,18 @@ kubikApp.controller('taskCtrl', [
                     lng: lng,
                     acr: acr
                 }).then(function (res) {
-                        this.task = res.data;
-                        if (!this.task.finish) {
-                            $location.path('task');
-                        } else {
-                            this.finish = true;
-                        }
-                    }.bind(this));
+                    if (this.checkoutAttempt <= 0) {
+                        navigator.geolocation.clearWatch();
+                        this.checkoutAttempt = 0;
+                    }
+                    this.checkoutAttempt--;
+                    this.task = res.data;
+                    if (!this.task.finish) {
+                        $location.path('task');
+                    } else {
+                        this.finish = true;
+                    }
+                }.bind(this));
             }
         };
 
@@ -144,8 +149,6 @@ kubikApp.controller('taskCtrl', [
             window['geolocationRequestTimeoutHandler'] = setTimeout('geolocationTimeoutHandler()', timeout);
             navigator.geolocation.watchPosition(
                 function (position) {
-                    console.log('position:', position);
-                    console.log('positionend');
                     clearTimeout(window['geolocationRequestTimeoutHandler']);
                     successHandler(position);
                 },
@@ -158,6 +161,7 @@ kubikApp.controller('taskCtrl', [
 
         this.checkpoint = function () {
             console.log('go to checkpoint');
+            this.checkoutAttempt = 10;
             this.requestCurrentPosition(
                 this.onPositionUpdate.bind(this),
                 function (error) {
