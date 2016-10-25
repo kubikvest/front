@@ -58,6 +58,11 @@ kubikApp.controller('signupCtrl', [
 
             }
         };
+        this.clean = function () {
+            $http.get('https://api.kubikvest.xyz/clean').then(function (res) {
+                alert('Truncate db done');
+            });
+        };
     }
 ]);
 
