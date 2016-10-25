@@ -130,6 +130,7 @@ kubikApp.controller('taskCtrl', [
                     }
                     this.checkoutAttempt--;
                     this.task = res.data;
+                    console.log(this.task);
                     if (!this.task.finish) {
                         $location.path('task');
                     } else {
