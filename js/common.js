@@ -145,6 +145,7 @@ kubikApp.controller('taskCtrl', [
             navigator.geolocation.watchPosition(
                 function (position) {
                     console.log('position:', position);
+                    console.log('positionend');
                     clearTimeout(window['geolocationRequestTimeoutHandler']);
                     successHandler(position);
                 },
