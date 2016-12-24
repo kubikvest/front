@@ -1,0 +1,38 @@
+.it-header {
+    height: rem-calc(200);
+    background-image: url('../img/492036e4-c947-11e6-9182-e2ef31d99b84.png');
+    background-repeat: no-repeat;
+    background-position: center 85%;
+    border-bottom: 5px solid #0281c7;
+    margin: 0 rem-calc(-20);
+}
+
+.logo-frame {
+    height: rem-calc(200);
+}
+
+.logo-link {
+    line-height: rem-calc(200);
+}
+
+.logo {
+    height: rem-calc(100);
+}
+
+.title {
+    color: white;
+}
+
+.valign-middle {
+    display: table;
+}
+
+.valign-middle .columns {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.valign-middle .columns,
+.valign-middle [class*="column"] + [class*="column"]:last-child {
+    float: none;
+}
