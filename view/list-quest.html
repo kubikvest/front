@@ -9,9 +9,10 @@
     </div>
 </header>
 <div class="row" data-ng-init="ctrl.getListQuest()">
-    <section class="large-4 medium-6 small-12">
-        <figure data-ng-repeat="quest in ctrl.quests">
-            <img src="/img/87e86364-c943-11e6-81fe-f25e4f1164c8.jpeg" alt="{| quest.title |}">
+    <section class="large-4 medium-6 small-12"
+             data-ng-repeat="quest in ctrl.quests">
+        <figure>
+            <img src="{| quest.picture |}" alt="{| quest.title |}">
             <figcaption>
                 <a class="raised-button ink button large expanded"
                    data-ng-click="ctrl.changeQuest(quest.quest_id)">{| quest.title |}</a>
