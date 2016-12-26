@@ -11,18 +11,15 @@
 <div class="row" data-ng-init="signup.activate()">
     <section class="large-12 small-12 columns main-content"
              data-ng-if="!signup.code">
-        <h3>
-            <a id="welcome-to-github-pages" class="anchor"
-               href="#welcome-to-github-pages" aria-hidden="true"><span
-                aria-hidden="true" class="octicon octicon-link"></span></a>Приветствую тебя искатель приключений!</h3>
-        <p>Тебе и твоей команде предстоит выбрать квест и отгадать 5 загаданных мест!
-        Вам надо лишь подойти к загаданному месту и нажать "проверить место", если место верное, то придет следующее задание, если нет, поможет подсказка.</p>
-        <p>Включи определение геопозиции. Убедись, что интернет работает. Авторизация через аккаунт ВК, поэтому помни пароль!)</p>
-        <p>Все, вы готовы! Наслаждайтейсь игрой и свежим воздухом!</p>
         <div class="text-center">
             <a class="raised-button ink"
                href="https://oauth.vk.com/authorize?client_id=5597353&scope=&redirect_uri=https://kubikvest.xyz&response_type=code">Начать игру</a>
         </div>
+        <h3>Приветствую тебя искатель приключений!</h3>
+        <p>Тебе и твоей команде предстоит выбрать квест и отгадать 5 загаданных мест!
+        Вам надо лишь подойти к загаданному месту и нажать "проверить место", если место верное, то придет следующее задание, если нет, поможет подсказка.</p>
+        <p>Включи определение геопозиции. Убедись, что интернет работает. Авторизация через аккаунт ВК, поэтому помни пароль!)</p>
+        <p>Все, вы готовы! Наслаждайтейсь игрой и свежим воздухом!</p>
         <p><a data-ng-click="signup.clean()">truncate db</a> </p>
     </section>
     <section class="large-12 small-12 columns card end"
