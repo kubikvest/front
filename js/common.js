@@ -129,7 +129,7 @@ kubikApp.controller('taskCtrl', [
                     lng: lng,
                     acr: acr
                 }).then(function (res) {
-                    if (this.checkoutAttempt <= 0) {
+                    if ((!res.error && typeof res.error === 'undefined') || this.checkoutAttempt <= 0) {
                         navigator.geolocation.clearWatch(this.geolocationId);
                         this.checkoutAttempt = 0;
                     } else {
