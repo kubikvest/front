@@ -21,9 +21,6 @@
         <h2 class="text-headline">{| ctrl.task.point.title |}</h2>
         <p>{| ctrl.task.point.description |}</p>
     </section>
-    <section class="large-12 small-12 columns card end">
-        <p>lat: {| ctrl.task.coords.lat |}, lng: {| ctrl.task.coords.lng |}, acr: {| ctrl.task.coords.acr |}, min-distance: {| ctrl.task.distance |}</p>
-    </section>
     <div class="text-center"
          data-ng-if="!ctrl.task.finish && ctrl.task.point_id == 0">
         <a class="raised-button ink large button"
