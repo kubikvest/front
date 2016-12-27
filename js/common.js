@@ -1,4 +1,3 @@
-console.log('init');
 var kubikApp = angular.module('kubikApp', ['ngRoute', 'ui.router', 'timer'], function ($interpolateProvider) {
     $interpolateProvider.startSymbol('{|').endSymbol('|}');
 });
@@ -118,9 +117,11 @@ kubikApp.controller('taskCtrl', [
         };
 
         this.onPositionUpdate = function (position) {
-            var lat = position.coords.latitude;
-            var lng = position.coords.longitude;
-            var acr = position.coords.accuracy;
+            //var lat = position.coords.latitude;
+            //var lng = position.coords.longitude;
+            var acr = 39;//position.coords.accuracy;
+            var lat = position[0];
+            var lng = position[1];
 
             if ($location.search().hasOwnProperty('t')) {
                 var token = $location.search()['t'];
@@ -131,7 +132,7 @@ kubikApp.controller('taskCtrl', [
                     acr: acr
                 }).then(function (res) {
                     if ((!res.error && typeof res.error === 'undefined') || this.checkoutAttempt <= 0) {
-                        navigator.geolocation.clearWatch(this.geolocationId);
+                        //navigator.geolocation.clearWatch(this.geolocationId);
                         this.checkoutAttempt = 0;
                     } else {
                         this.checkoutAttempt--;
@@ -176,8 +177,8 @@ kubikApp.controller('taskCtrl', [
                 mapStateAutoApply: true
             }).then(function (res) {
                 console.log('ymap');
-                console.log(res.geoObjects.get(0).geometry.getCoordinates());
-            });
+                this.onPositionUpdate(res.geoObjects.get(0).geometry.getCoordinates());
+            }.bind(this));
             /*
             this.requestCurrentPosition(
                 this.onPositionUpdate.bind(this),
