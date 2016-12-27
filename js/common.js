@@ -120,8 +120,9 @@ kubikApp.controller('taskCtrl', [
             //var lat = position.coords.latitude;
             //var lng = position.coords.longitude;
             var acr = 39;//position.coords.accuracy;
-            var lat = position[0];
-            var lng = position[1];
+            console.log(position);
+            var lat = 10;
+            var lng = 10;
 
             if ($location.search().hasOwnProperty('t')) {
                 var token = $location.search()['t'];
