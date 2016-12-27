@@ -175,6 +175,7 @@ kubikApp.controller('taskCtrl', [
                 provider: 'browser',
                 mapStateAutoApply: true
             }).then(function (res) {
+                console.log('ymap');
                 console.log(res.geoObjects.get(0).geometry.getCoordinates());
             });
             /*
