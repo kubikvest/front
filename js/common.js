@@ -1,6 +1,6 @@
+ymaps.ready(init);
 var kubikApp = angular.module('kubikApp', ['ngRoute', 'ui.router', 'timer'], function ($interpolateProvider) {
     $interpolateProvider.startSymbol('{|').endSymbol('|}');
-    ymaps.ready(init);
 });
 
 angular.element(document).ready(function () {
