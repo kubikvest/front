@@ -168,7 +168,7 @@ kubikApp.controller('taskCtrl', [
         };
 
         this.checkpoint = function () {
-            console.log('go to checkpoint');
+            console.log('go to checkpoint1');
             this.checkoutAttempt = 10;
             var geolocation = ymaps.geolocation;
             geolocation.get({
