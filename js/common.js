@@ -1,4 +1,4 @@
-console.log('123');
+console.log('222');
 var kubikApp = angular.module('kubikApp', ['ngRoute', 'ui.router', 'timer'], function ($interpolateProvider) {
     $interpolateProvider.startSymbol('{|').endSymbol('|}');
 });
@@ -179,8 +179,11 @@ kubikApp.controller('taskCtrl', [
                 mapStateAutoApply: true
             }).then(function (res) {
                 console.log('ymap');
-                this.onPositionUpdate(res.geoObjects.get(0).geometry.getCoordinates());
-            }.bind(this));
+                return res.geoObjects.get(0).geometry.getCoordinates();
+            }.bind(this)).then(function(res){
+                console.log(res);
+                //this.onPositionUpdate();
+            });
             /*
             this.requestCurrentPosition(
                 this.onPositionUpdate.bind(this),
