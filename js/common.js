@@ -1,5 +1,6 @@
 var kubikApp = angular.module('kubikApp', ['ngRoute', 'ui.router', 'timer'], function ($interpolateProvider) {
     $interpolateProvider.startSymbol('{|').endSymbol('|}');
+    ymaps.ready(init);
 });
 
 angular.element(document).ready(function () {
@@ -169,6 +170,14 @@ kubikApp.controller('taskCtrl', [
         this.checkpoint = function () {
             console.log('go to checkpoint');
             this.checkoutAttempt = 10;
+            var geolocation = ymaps.geolocation;
+            geolocation.get({
+                provider: 'browser',
+                mapStateAutoApply: true
+            }).then(function (res) {
+                console.log(res.geoObjects.get(0).geometry.getCoordinates());
+            });
+            /*
             this.requestCurrentPosition(
                 this.onPositionUpdate.bind(this),
                 function (error) {
@@ -199,6 +208,7 @@ kubikApp.controller('taskCtrl', [
                 7000,
                 {maximumAge: 10000, timeout: 0}
             );
+            */
         };
 
         this.getFinish = function () {
