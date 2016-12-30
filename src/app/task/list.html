@@ -1,0 +1,17 @@
+<div class="kubik-app-task kubik-app__page kubik-page">
+    <header class="kubik-page__header">
+        <h3 class="text-center">
+            Список квестов
+        </h3>
+    </header>
+    <section class="kubik-page__content">
+        <div class="kubik-tasks">
+            <div class="kubik-tasks__item kubik-task" *ngFor="let task of tasks">
+                {{ task.description }}
+                <div class="button success">
+                    {{ task.title }}
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
