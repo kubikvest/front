@@ -1,0 +1,71 @@
+@import "~foundation-sites/scss/util/unit";
+@import "../mixins";
+
+.kubik-app {
+    position: relative;
+    display: block;
+    text-align: left;
+    &:before {
+        content: "";
+        position: absolute;
+        left: rem-calc(-10);
+        top: rem-calc(10);
+        @include shadow-4dp;
+        height: 100%;
+        width: 100%;
+        background-color: #e3cb51;
+    }
+    &:after {
+        content: "";
+        position: absolute;
+        right: rem-calc(-10);
+        bottom: rem-calc(10);
+        @include shadow-4dp;
+        height: 100%;
+        width: 100%;
+        background-color: #f58344;
+    }
+    &__page {
+        z-index: 100;
+        position: relative;
+        @include shadow-8dp;
+        background-color: #efefef;
+    }
+}
+
+.kubik-description {
+    color: #444;
+}
+
+.kubik-page {
+    &__header {
+        text-transform: uppercase;
+        padding: rem-calc(20);
+        background-color: #e1e6ec;
+        color: #444;
+    }
+    &__content {
+        padding: rem-calc(20);
+    }
+}
+
+.kubik-footer {
+    text-align: center;
+    background-color: #e1e6ec;
+    &__button {
+        @include shadow-4dp;
+        background-color: #35353f;
+        text-transform: uppercase;
+        letter-spacing: rem-calc(1);
+        //box-shadow: inset 0 0 0 rem-calc(2) #35353f;
+        color: #fff;
+        display: inline-block;
+        padding: rem-calc(20 50);
+        transition: all 0.3s;
+        &:hover {
+            opacity: 0.8;
+            color: #fff;
+        }
+    }
+
+}
