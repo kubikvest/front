@@ -1,4 +1,4 @@
-console.log('444');
+console.log('333333');
 var kubikApp = angular.module('kubikApp', ['ngRoute', 'ui.router', 'timer'], function ($interpolateProvider) {
     $interpolateProvider.startSymbol('{|').endSymbol('|}');
 });
