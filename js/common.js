@@ -133,14 +133,16 @@ kubikApp.controller('taskCtrl', [
                     lng: lng,
                     acr: acr
                 }).then(function (res) {
-                    if ((!res.error && typeof res.error === 'undefined') || this.checkoutAttempt <= 0) {
+                    /*if ((!res.error && typeof res.error === 'undefined') || this.checkoutAttempt <= 0) {
                         //navigator.geolocation.clearWatch(this.geolocationId);
                         this.checkoutAttempt = 0;
                     } else {
                         this.checkoutAttempt--;
-                    }
+                    }*/
                     this.task = res.data;
+                    console.log(this.task.finish);
                     if (!this.task.finish) {
+                        console.log(123123);
                         $location.path('task');
                     } else {
                         this.finish = true;
