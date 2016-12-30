@@ -103,6 +103,7 @@ kubikApp.controller('taskCtrl', [
         };
 
         this.getTask = function () {
+            console.log(333333);
             this.$scope.$broadcast('timer-reset');
             if ($location.search().hasOwnProperty('t')) {
                 var token = $location.search()['t'];
