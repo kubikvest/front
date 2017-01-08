@@ -5,7 +5,7 @@
     "angular-cli": {},
     "scripts": {
         "ng": "ng",
-        "start": "ng serve --host 0.0.0.0 --port 9020",
+        "start": "ng serve --host 0.0.0.0 --port 9020 --aot",
         "build": "ng build --prod --aot",
         "lint": "tslint \"src/**/*.ts\"",
         "test": "ng test",
@@ -28,6 +28,7 @@
         "zone.js": "^0.7.2"
     },
     "devDependencies": {
+        "bower": "1.8.0",
         "@angular/compiler-cli": "^2.3.1",
         "@types/jasmine": "2.5.38",
         "@types/node": "^6.0.42",
