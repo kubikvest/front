@@ -25,7 +25,7 @@
     <div class="text-center"
          data-ng-if="!ctrl.task.finish && ctrl.task.point_id != 0">
         <a class="raised-button ink large button"
-           data-ng-class="{'disabled': !ctrl.isLoaded}"
+           data-ng-class="{'disabled': ctrl.isLoaded}"
            data-ng-click="ctrl.checkpoint()">Проверить место</a><!-- {| ctrl.checkoutAttempt |}-->
     </div>
     <div class="text-center">
