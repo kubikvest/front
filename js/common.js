@@ -93,6 +93,7 @@ kubikApp.controller('listQuestCtrl', ['$http', '$location', function ($http, $lo
 kubikApp.controller('taskCtrl', [
     '$http', '$location', '$scope', '$timeout', function ($http, $location, $scope, $timeout) {
         this.finish = false;
+        this.isLoaded = false;
         this.$scope = $scope;
         this.geolocationWork = true;
         this.geolocationErr = "";
@@ -142,6 +143,7 @@ kubikApp.controller('taskCtrl', [
                     }*/
                     this.task = res.data;
                     console.log(this.task.finish);
+                    this.isLoaded = false;
                     if (!this.task.finish) {
                         console.log(123123);
                         $location.path('task');
@@ -177,6 +179,7 @@ kubikApp.controller('taskCtrl', [
             console.log('go to checkpoint1');
             this.checkoutAttempt = 10;
             var geolocation = ymaps.geolocation;
+            this.isLoaded = true;
             geolocation.get({
                 provider: 'browser',
                 mapStateAutoApply: true
