@@ -1,4 +1,4 @@
-var kubikApp = angular.module('kubikApp', ['ngRoute', 'ui.router', 'timer'], function ($interpolateProvider) {
+var kubikApp = angular.module('kubikApp', ['ngRoute', 'ui.router', 'timer', 'ngSanitize'], function ($interpolateProvider) {
     $interpolateProvider.startSymbol('{|').endSymbol('|}');
 });
 
