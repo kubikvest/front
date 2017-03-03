@@ -26,7 +26,15 @@
          data-ng-if="!ctrl.task.finish && ctrl.task.point_id != 0">
         <a class="raised-button ink large button"
            data-ng-class="{'disabled': ctrl.isLoaded}"
-           data-ng-click="ctrl.checkpoint()">Проверить место</a><!-- {| ctrl.checkoutAttempt |}-->
+           data-ng-click="ctrl.checkpoint()">
+            <div id="escapingBallG"
+                 data-ng-if="ctrl.isLoaded">
+                <div id="escapingBall_1" class="escapingBallG"></div>
+            </div>
+            <div data-ng-if="!ctrl.isLoaded">
+                Проверить место
+            </div>
+        </a><!-- {| ctrl.checkoutAttempt |}-->
     </div>
     <div class="text-center">
         <div>ДО ПОДСКАЗКИ ОСТАЛОСЬ:</div>
