@@ -122,7 +122,6 @@ kubikApp.controller('taskCtrl', [
             //var lat = position.coords.latitude;
             //var lng = position.coords.longitude;
             var acr = 39;//position.coords.accuracy;
-            console.log('aaa', position);
             var lat = position[0];
             var lng = position[1];
 
@@ -141,11 +140,10 @@ kubikApp.controller('taskCtrl', [
                         this.checkoutAttempt--;
                     }*/
                     this.task = res.data;
-                    console.log(this.task.finish);
                     this.isLoaded = false;
                     if (!this.task.finish) {
-                        console.log(123123);
-                        $location.path('task');
+                        this.getTask();
+                        //$location.path('task');
                     } else {
                         this.finish = true;
                     }
@@ -175,7 +173,6 @@ kubikApp.controller('taskCtrl', [
         };
 
         this.checkpoint = function () {
-            console.log('go to checkpoint1');
             this.checkoutAttempt = 10;
             var geolocation = ymaps.geolocation;
             this.isLoaded = true;
@@ -183,10 +180,8 @@ kubikApp.controller('taskCtrl', [
                 provider: 'browser',
                 mapStateAutoApply: true
             }).then(function (res) {
-                console.log('ymap');
                 return res.geoObjects.get(0).geometry.getCoordinates();
             }).then(function(res){
-                console.log(res);
                 this.onPositionUpdate(res);
             }.bind(this));
             /*
