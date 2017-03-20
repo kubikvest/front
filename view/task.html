@@ -37,7 +37,7 @@
         </a><!-- {| ctrl.checkoutAttempt |}-->
     </div>
     <div class="text-center">
-        <div>ДО ПОДСКАЗКИ ОСТАЛОСЬ:</div>
+        <div>{| ctrl.task.point.prompt.title |}</div>
         <h3>
             <timer countdown="ctrl.task.countdownVal"
                    interval="1000"
@@ -48,8 +48,8 @@
         </h3>
     </div>
     <div class="text-center"
-         data-ng-if="ctrl.task.point.prompt">
-        <p data-ng-bind-html="ctrl.task.point.prompt"></p>
+         data-ng-if="ctrl.task.point.prompt.description">
+        <p data-ng-bind-html="ctrl.task.point.prompt.description"></p>
     </div>
     <div class="text-center"
          data-ng-if="ctrl.task.finish">
