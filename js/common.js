@@ -147,7 +147,11 @@ kubikApp.controller('taskCtrl', [
                     } else {
                         this.finish = true;
                     }
-                }.bind(this));
+                }.bind(this)).error(function (error, status){
+                    this.isLoaded = false;
+                    $scope.data.error = { message: error, status: status};
+                    console.log($scope.data.error.status);
+                });
             }
         };
 
