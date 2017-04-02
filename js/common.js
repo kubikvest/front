@@ -112,6 +112,7 @@ kubikApp.controller('taskCtrl', [
             }
             this.geolocation = ymaps.geolocation;
             console.log(this.geolocation);
+            console.log('this.geolocation');
         };
 
         this.init();
