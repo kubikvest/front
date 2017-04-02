@@ -95,6 +95,7 @@ kubikApp.controller('taskCtrl', [
         this.isLoaded = false;
         this.$scope = $scope;
         this.geolocationWork = true;
+        this.geolocation = {};
         this.geolocationErr = "";
         this.checkoutAttempt = 0;
         this.geolocationId = null;
@@ -102,6 +103,16 @@ kubikApp.controller('taskCtrl', [
             countdownVal: 0
         };
 
+        this.init = function () {
+            if (typeof ymaps === 'undefined' || typeof ymaps.geolocation === 'undefined') {
+                setTimeout(this.init, 100);
+                return;
+            }
+            this.geolocation = ymaps.geolocation;
+        };
+
+        this.init();
+        
         this.getTask = function () {
             console.log(333333);
             this.$scope.$broadcast('timer-reset');
@@ -178,9 +189,12 @@ kubikApp.controller('taskCtrl', [
 
         this.checkpoint = function () {
             this.checkoutAttempt = 10;
-            var geolocation = ymaps.geolocation;
+            
+
+
+            //var geolocation = ymaps.geolocation;
             this.isLoaded = true;
-            geolocation.get({
+            this.geolocation.get({
                 provider: 'browser',
                 mapStateAutoApply: true
             }).then(function (res) {
