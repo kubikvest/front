@@ -104,11 +104,14 @@ kubikApp.controller('taskCtrl', [
         };
 
         this.init = function () {
+            console.log('init');
             if (typeof ymaps === 'undefined' || typeof ymaps.geolocation === 'undefined') {
                 setTimeout(this.init, 100);
+                console.log('ymaps undefined');
                 return;
             }
             this.geolocation = ymaps.geolocation;
+            console.log(this.geolocation);
         };
 
         this.init();
