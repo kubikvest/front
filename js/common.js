@@ -110,6 +110,7 @@ kubikApp.controller('taskCtrl', [
                 console.log('ymaps undefined');
                 return;
             } else {
+                console.log('this.geolocation 111');
                 this.geolocation = ymaps.geolocation;
                 console.log('this.geolocation');
             }
