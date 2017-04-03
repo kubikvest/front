@@ -107,7 +107,7 @@ kubikApp.controller('taskCtrl', [
             console.log('init');
             if (typeof ymaps === 'undefined' || typeof ymaps.geolocation === 'undefined') {
                 setTimeout(this.init, 100);
-                console.log('ymaps undefined');
+                console.log('ymaps undefined 222');
                 return;
             } else {
                 console.log('this.geolocation 111');
@@ -197,9 +197,9 @@ kubikApp.controller('taskCtrl', [
 
 
 
-            //var geolocation = ymaps.geolocation;
+            var geolocation = ymaps.geolocation;
             this.isLoaded = true;
-            this.geolocation.get({
+            geolocation.get({
                 provider: 'browser',
                 mapStateAutoApply: true
             }).then(function (res) {
