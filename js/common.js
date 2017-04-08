@@ -100,23 +100,12 @@ kubikApp.controller('taskCtrl', [
         this.geolocationErr = "";
         this.checkoutAttempt = 0;
         this.geolocationId = null;
+        this.error = {
+            msg: ""
+        };
         this.task = {
             countdownVal: 0
         };
-
-        this.init = function () {
-            if (typeof ymaps === 'undefined' || typeof ymaps.geolocation === 'undefined') {
-                setTimeout(this.init, 100);
-                console.log('ymaps undefined');
-                return;
-            } else {
-                console.log('this.geolocation found');
-                this.geolocation = ymaps.geolocation;
-                console.log('this.geolocation  found');
-            }
-        };
-
-        this.init();
 
         this.getTask = function () {
             this.$scope.$broadcast('timer-reset');
@@ -125,7 +114,6 @@ kubikApp.controller('taskCtrl', [
                 $http.get('https://api.kubikvest.xyz/task?t=' + token).then(function (res) {
                     this.task = res.data;
                     this.task.countdownVal = res.data.timer;
-                    console.log(this.task);
                     $timeout(function () {
                         this.$scope.$broadcast('timer-start');
                     }.bind(this));
@@ -139,6 +127,8 @@ kubikApp.controller('taskCtrl', [
             var acr = 39;//position.coords.accuracy;
             var lat = position[0];
             var lng = position[1];
+
+            console.info("lat", lat, "lng", lng);
 
             if ($location.search().hasOwnProperty('t')) {
                 var token = $location.search()['t'];
@@ -166,15 +156,74 @@ kubikApp.controller('taskCtrl', [
                         this.finish = true;
                     }*/
                 }, function (res) {
-                    console.log("Error checkout");
-                    then.isLoaded = false;
-                }.bind(then));
-                /*.error(function (error, status){
-                    console.log("Error checkout");
+                    if (res.data) {
+                        this.error = res.data.error;
+                    } else {
+                        var msg = "Что-то пошло не так :(";
+                        if (res.status >= 500) {
+                            msg = "Нет связи с сервером :(";
+                        }
+                        this.error = {
+                            msg: msg
+                        };
+                    }
                     this.isLoaded = false;
-                    $scope.data.error = { message: error, status: status};
-                    console.log($scope.data.error.status);
-                }.bind(this));*/
+                }.bind(this));
+            }
+        };
+
+        this.onPositionUpdate2 = function (position) {
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
+            var acr = position.coords.accuracy;
+
+            console.info("lat", lat, "lng", lng, "acr", acr);
+
+            if ($location.search().hasOwnProperty('t')) {
+                var token = $location.search()['t'];
+                $http.post('https://api.kubikvest.xyz/checkpoint', {
+                    t: this.task.t,
+                    lat: lat,
+                    lng: lng,
+                    acr: acr,
+                    att: this.checkoutAttempt
+                }).then(function (res) {
+                    console.log("Success checkout");
+                    this.checkoutAttempt = 0;
+                    this.downCheckoutAttempt();
+
+                    this.task = res.data;
+                    if (!this.task.finish) {
+                        this.getTask();
+                     //$location.path('task');
+                    } else {
+                        this.finish = true;
+                    }
+                }.bind(this), function (res) {
+                    this.downCheckoutAttempt();
+                    if (res.data) {
+                        this.error = res.data.error;
+                    } else {
+                        var msg = "Что-то пошло не так :(";
+                        if (res.status >= 500) {
+                            msg = "Нет связи с сервером :(";
+                        }
+                        this.error = {
+                            msg: msg
+                        };
+                    }
+                }.bind(this));
+            }
+        };
+
+        this.downCheckoutAttempt = function () {
+            if (this.checkoutAttempt <= 0) {
+                navigator.geolocation.clearWatch(this.geolocationId);
+                this.isLoaded = false;
+                this.error = {};
+                this.checkoutAttempt = 0;
+            } else {
+                this.checkoutAttempt--;
             }
         };
 
@@ -200,13 +249,13 @@ kubikApp.controller('taskCtrl', [
         };
 
         this.checkpoint = function () {
-            this.checkoutAttempt = 10;
+            this.error = {};
+            this.checkoutAttempt = 9;
 
-
-
-            var geolocation = ymaps.geolocation;
+            //var geolocation = ymaps.geolocation;
             this.isLoaded = true;
-            geolocation.get({
+
+            /*geolocation.get({
                 provider: 'browser',
                 mapStateAutoApply: true
             }).then(function (res) {
@@ -214,9 +263,10 @@ kubikApp.controller('taskCtrl', [
             }).then(function(res){
                 this.onPositionUpdate(res);
             }.bind(this));
-            /*
+            this.isLoaded = false;*/
+
             this.requestCurrentPosition(
-                this.onPositionUpdate.bind(this),
+                this.onPositionUpdate2.bind(this),
                 function (error) {
                     console.log(error);
                     switch (error.code) {
@@ -245,7 +295,7 @@ kubikApp.controller('taskCtrl', [
                 7000,
                 {maximumAge: 10000, timeout: 0}
             );
-            */
+
         };
 
         this.getFinish = function () {

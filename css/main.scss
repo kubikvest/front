@@ -51,6 +51,15 @@
     margin: 0 rem-calc(-15);
 }
 
+.columns {
+    margin-bottom: 20px;
+}
+
+.alert {
+    background-color: $red-300;
+    color: $white-100;
+}
+
 .logo-frame {
     height: rem-calc(200);
 }
