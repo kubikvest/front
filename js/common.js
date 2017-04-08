@@ -268,32 +268,28 @@ kubikApp.controller('taskCtrl', [
             this.requestCurrentPosition(
                 this.onPositionUpdate2.bind(this),
                 function (error) {
-                    console.log(error);
                     switch (error.code) {
                         case error.PERMISSION_DENIED:
-                            this.geolocationErr = "User denied access!";
+                            this.error.msg = "Вы нарочно запретили доступ к GPS :( 😉";
                             break;
                         case error.POSITION_UNAVAILABLE:
-                            this.geolocationErr = "You must be hiding in Area 51!";
+                            this.error.msg = "Вы точно на пленете земля? 🚀";
                             break;
                         case error.TIMEOUT:
-                            this.geolocationErr = "hmmm we timed out trying to find where you are hiding!";
+                            this.error.msg = "Мне вас не найти :(";
                             break;
                     }
                     this.geolocationWork = false;
+                    this.isLoaded = false;
                     $scope.$applyAsync();
                 }.bind(this),
                 function () {
-                    var message = 'Hi there! we are trying to locate you but you have '
-                        + 'not answered the security question yet.\n\n'
-                        + 'Please choose "Share My Location" to enable us to find you.';
-                    this.geolocationErr = message;
-                    this.task.geolocationErr = message;
+                    this.error.msg = "Нет доступа к GPS :(";
                     this.geolocationWork = false;
+                    this.isLoaded = false;
                     $scope.$applyAsync();
                 }.bind(this),
-                7000,
-                {maximumAge: 10000, timeout: 0}
+                7000
             );
 
         };
