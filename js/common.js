@@ -91,6 +91,7 @@ kubikApp.controller('listQuestCtrl', ['$http', '$location', function ($http, $lo
 
 kubikApp.controller('taskCtrl', [
     '$http', '$location', '$scope', '$timeout', function ($http, $location, $scope, $timeout) {
+        console.log('version=1');
         this.finish = false;
         this.isLoaded = false;
         this.$scope = $scope;
@@ -164,10 +165,11 @@ kubikApp.controller('taskCtrl', [
                         this.finish = true;
                     }
                 }.bind(this)).error(function (error, status){
+                    console.log("Error checkout");
                     this.isLoaded = false;
                     $scope.data.error = { message: error, status: status};
                     console.log($scope.data.error.status);
-                });
+                }.bind(this));
             }
         };
 
