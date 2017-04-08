@@ -46,7 +46,8 @@
     height: rem-calc(200);
     background-repeat: no-repeat;
     background-position: center 85%;
-    border-bottom: 5px solid #0281c7;
+    background-color: $light-blue-600;
+    border-bottom: 5px solid $light-blue-800;
     margin: 0 rem-calc(-15);
 }
 
