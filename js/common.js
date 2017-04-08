@@ -250,7 +250,7 @@ kubikApp.controller('taskCtrl', [
 
         this.checkpoint = function () {
             this.error = {};
-            this.checkoutAttempt = 9;
+            this.checkoutAttempt = 3;
 
             //var geolocation = ymaps.geolocation;
             this.isLoaded = true;
