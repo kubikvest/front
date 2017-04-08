@@ -91,7 +91,7 @@ kubikApp.controller('listQuestCtrl', ['$http', '$location', function ($http, $lo
 
 kubikApp.controller('taskCtrl', [
     '$http', '$location', '$scope', '$timeout', function ($http, $location, $scope, $timeout) {
-        console.log('version=1');
+        console.log('version=2');
         this.finish = false;
         this.isLoaded = false;
         this.$scope = $scope;
@@ -105,22 +105,20 @@ kubikApp.controller('taskCtrl', [
         };
 
         this.init = function () {
-            console.log('init');
             if (typeof ymaps === 'undefined' || typeof ymaps.geolocation === 'undefined') {
                 setTimeout(this.init, 100);
-                console.log('ymaps undefined 222');
+                console.log('ymaps undefined');
                 return;
             } else {
-                console.log('this.geolocation 111');
+                console.log('this.geolocation found');
                 this.geolocation = ymaps.geolocation;
-                console.log('this.geolocation');
+                console.log('this.geolocation  found');
             }
         };
 
         this.init();
 
         this.getTask = function () {
-            console.log(333333);
             this.$scope.$broadcast('timer-reset');
             if ($location.search().hasOwnProperty('t')) {
                 var token = $location.search()['t'];
@@ -164,12 +162,16 @@ kubikApp.controller('taskCtrl', [
                     } else {
                         this.finish = true;
                     }
-                }.bind(this)).error(function (error, status){
+                }.bind(this), function (res) {
+                    console.log("Error checkout", res);
+                    this.isLoaded = false;
+                }.bind(this));
+                /*.error(function (error, status){
                     console.log("Error checkout");
                     this.isLoaded = false;
                     $scope.data.error = { message: error, status: status};
                     console.log($scope.data.error.status);
-                }.bind(this));
+                }.bind(this));*/
             }
         };
 
