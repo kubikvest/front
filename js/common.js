@@ -91,7 +91,7 @@ kubikApp.controller('listQuestCtrl', ['$http', '$location', function ($http, $lo
 
 kubikApp.controller('taskCtrl', [
     '$http', '$location', '$scope', '$timeout', function ($http, $location, $scope, $timeout) {
-        console.log('version=2');
+        console.log('version=3');
         this.finish = false;
         this.isLoaded = false;
         this.$scope = $scope;
@@ -148,24 +148,26 @@ kubikApp.controller('taskCtrl', [
                     lng: lng,
                     acr: acr
                 }).then(function (res) {
+                    console.log("Success checkout", res);
                     /*if ((!res.error && typeof res.error === 'undefined') || this.checkoutAttempt <= 0) {
                         //navigator.geolocation.clearWatch(this.geolocationId);
                         this.checkoutAttempt = 0;
                     } else {
                         this.checkoutAttempt--;
                     }*/
-                    this.task = res.data;
+
+
+                    /*this.task = res.data;
                     this.isLoaded = false;
                     if (!this.task.finish) {
                         this.getTask();
                         //$location.path('task');
                     } else {
                         this.finish = true;
-                    }
-                }.bind(this), function (res) {
+                    }*/
+                }, function (res) {
                     console.log("Error checkout", res);
-                    this.isLoaded = false;
-                }.bind(this));
+                });
                 /*.error(function (error, status){
                     console.log("Error checkout");
                     this.isLoaded = false;
