@@ -187,8 +187,9 @@ kubikApp.controller('taskCtrl', [
                     lng: lng,
                     acr: acr,
                     att: this.checkoutAttempt,
-                    qq: 1,
                     title: this.task.point.title,
+                    point: this.point_id,
+                    pointid: this.task.point.pointId,
                     point_id: this.task.point.point_id
                 }).then(function (res) {
                     console.log("Success checkout");
@@ -196,6 +197,7 @@ kubikApp.controller('taskCtrl', [
                     this.downCheckoutAttempt();
 
                     this.task = res.data;
+                    this.point_id = this.task.point.point_id;
                     if (!this.task.finish) {
                         this.getTask();
                      //$location.path('task');
