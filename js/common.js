@@ -79,7 +79,6 @@ kubikApp.controller('listQuestCtrl', ['$http', '$location', function ($http, $lo
         }
     };
     this.changeQuest = function (questId) {
-        console.log(questId);
         $http.post('https://api.kubikvest.xyz/create-game', {
             t: this.token,
             quest_id: questId
@@ -136,7 +135,8 @@ kubikApp.controller('taskCtrl', [
                     t: this.task.t,
                     lat: lat,
                     lng: lng,
-                    acr: acr
+                    acr: acr,
+                    point_id: this.task.point.point_id
                 }).then(function (res) {
                     console.log("Success checkout");
                     /*if ((!res.error && typeof res.error === 'undefined') || this.checkoutAttempt <= 0) {
