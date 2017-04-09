@@ -180,12 +180,14 @@ kubikApp.controller('taskCtrl', [
 
             if ($location.search().hasOwnProperty('t')) {
                 var token = $location.search()['t'];
+                console.info(this.task);
                 $http.post('https://api.kubikvest.xyz/checkpoint', {
                     t: this.task.t,
                     lat: lat,
                     lng: lng,
                     acr: acr,
                     att: this.checkoutAttempt,
+                    qq: 1,
                     title: this.task.point.title,
                     point_id: this.task.point.point_id
                 }).then(function (res) {
