@@ -113,6 +113,7 @@ kubikApp.controller('taskCtrl', [
                 $http.get('https://api.kubikvest.xyz/task?t=' + token).then(function (res) {
                     this.task = res.data;
                     this.task.countdownVal = res.data.timer;
+                    console.log("countdownVal", this.task.countdownVal);
                     $timeout(function () {
                         this.$scope.$broadcast('timer-start');
                     }.bind(this));
