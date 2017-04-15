@@ -101,6 +101,9 @@ kubikApp.controller('taskCtrl', [
         this.checkoutAttempt = 0;
         this.geolocationId = null;
         this.lastCheckTime = new Date().getTime();
+        this.time = {
+            interval: 0
+        };
         this.notify = {
             msg: "",
             type: "success"
@@ -116,7 +119,7 @@ kubikApp.controller('taskCtrl', [
                 $http.get('https://api.kubikvest.xyz/task?t=' + token).then(function (res) {
                     this.task = res.data;
                     this.task.countdownVal = res.data.timer;
-                    console.log("countdownVal", this.task.countdownVal);
+                    this.time.interval = res.data.timer;
                     $timeout(function () {
                         this.$scope.$broadcast('timer-start');
                     }.bind(this));

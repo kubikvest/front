@@ -25,7 +25,7 @@
     <div class="text-center">
         <div>{| ctrl.task.point.prompt.title |}</div>
         <h3>
-            <timer time="ctrl.task.countdownVal"
+            <timer time="ctrl.time"
                    finish="ctrl.getTask()"
                    data-ng-if="ctrl.task.countdownVal">
                 {| $ctrl.minutes |}:{| $ctrl.seconds |}
