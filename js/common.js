@@ -90,7 +90,7 @@ kubikApp.controller('listQuestCtrl', ['$http', '$location', function ($http, $lo
 
 kubikApp.controller('taskCtrl', [
     '$http', '$location', '$scope', '$timeout', function ($http, $location, $scope, $timeout) {
-        console.log('version=5');
+        setInterval(this.checkSleep, 1000);
         this.finish = false;
         this.isLoaded = false;
         this.$scope = $scope;
@@ -99,6 +99,7 @@ kubikApp.controller('taskCtrl', [
         this.geolocationErr = "";
         this.checkoutAttempt = 0;
         this.geolocationId = null;
+        this.lastCheckTime = new Date().getTime();
         this.notify = {
             msg: "",
             type: "success"
@@ -120,6 +121,16 @@ kubikApp.controller('taskCtrl', [
                     }.bind(this));
                 }.bind(this));
             }
+        };
+
+        this.checkSleep = function () {
+            console.log('checkSleep');
+            var now = new Date().getTime();
+            var diff = now - this.lastCheckTime;
+            if (diff > 3000) {
+                this.getTask();
+            }
+            this.lastCheckTime = now;
         };
 
         this.onPositionUpdate = function (position) {
