@@ -38,7 +38,7 @@
         <p data-ng-bind-html="ctrl.task.point.prompt.description"></p>
     </div>
     <div class="large-12 small-12 text-center columns card end"
-         data-ng-class="{| ctrl.notify.type |}"
+         data-ng-class="ctrl.notify.type"
          data-ng-if="ctrl.notify.msg">
         <p></p>
         <p>{| ctrl.notify.msg |}</p>
