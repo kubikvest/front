@@ -99,8 +99,6 @@ kubikApp.controller('taskCtrl', [
         this.geolocationErr = "";
         this.checkoutAttempt = 0;
         this.geolocationId = null;
-        this.minutes = 0;
-        this.seconds = 0;
         this.notify = {
             msg: "",
             type: "success"
