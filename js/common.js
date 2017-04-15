@@ -90,7 +90,15 @@ kubikApp.controller('listQuestCtrl', ['$http', '$location', function ($http, $lo
 
 kubikApp.controller('taskCtrl', [
     '$http', '$location', '$scope', '$timeout', function ($http, $location, $scope, $timeout) {
-        setInterval(this.checkSleep.bind(this), 1000);
+        setInterval(function () {
+            console.log('checkSleep');
+            var now = new Date().getTime();
+            var diff = now - this.lastCheckTime;
+            if (diff > 3000) {
+                this.getTask();
+            }
+            this.lastCheckTime = now;
+        }.bind(this), 1000);
         this.finish = false;
         this.isEscape = false;
         this.isLoaded = false;
@@ -134,16 +142,6 @@ kubikApp.controller('taskCtrl', [
                     window.location = 'https://kubikvest.xyz/list-quest?t=' + token;
                 }.bind(this));
             }
-        };
-
-        this.checkSleep = function () {
-            console.log('checkSleep');
-            var now = new Date().getTime();
-            var diff = now - this.lastCheckTime;
-            if (diff > 3000) {
-                this.getTask();
-            }
-            this.lastCheckTime = now;
         };
 
         this.onPositionUpdate = function (position) {
