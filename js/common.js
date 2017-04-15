@@ -90,7 +90,7 @@ kubikApp.controller('listQuestCtrl', ['$http', '$location', function ($http, $lo
 
 kubikApp.controller('taskCtrl', [
     '$http', '$location', '$scope', '$timeout', function ($http, $location, $scope, $timeout) {
-        setInterval(this.checkSleep, 1000);
+        setInterval(this.checkSleep.bind(this), 1000);
         this.finish = false;
         this.isEscape = false;
         this.isLoaded = false;
