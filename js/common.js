@@ -125,9 +125,12 @@ kubikApp.controller('taskCtrl', [
         };
 
         this.escape = function () {
-            $http.get('https://api.kubikvest.xyz/escape?t=' + token).then(function (res) {
-                $location.path('list-quest');
-            }.bind(this));
+            if ($location.search().hasOwnProperty('t')) {
+                var token = $location.search()['t'];
+                $http.get('https://api.kubikvest.xyz/escape?t=' + token).then(function (res) {
+                    $location.path('list-quest');
+                }.bind(this));
+            }
         };
 
         this.checkSleep = function () {
