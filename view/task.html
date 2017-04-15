@@ -62,4 +62,12 @@
         <a class="raised-button ink large button"
            href="{| ctrl.task.links.finish |}">Мои результаты тут</a>
     </div>
+    <div class="text-center">
+        <a class="raised-button second small button"
+           data-ng-click="ctrl.escape()">
+            <div data-ng-if="!ctrl.isLoaded">
+                Завершить
+            </div>
+        </a>
+    </div>
 </div>

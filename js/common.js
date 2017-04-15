@@ -210,7 +210,6 @@ kubikApp.controller('taskCtrl', [
                     this.task = res.data;
                     this.point_id = this.task.point.point_id;
                     if (!this.task.finish) {
-                        this.sleep(5000);
                         this.getTask();
                      //$location.path('task');
                     } else {
