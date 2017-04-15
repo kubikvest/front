@@ -207,10 +207,10 @@ kubikApp.controller('taskCtrl', [
                     };
                     this.checkoutAttempt = 0;
                     this.downCheckoutAttempt();
-                    this.sleep(10000);
                     this.task = res.data;
                     this.point_id = this.task.point.point_id;
                     if (!this.task.finish) {
+                        this.sleep(5000);
                         this.getTask();
                      //$location.path('task');
                     } else {
