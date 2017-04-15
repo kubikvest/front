@@ -61,12 +61,32 @@
         <a class="raised-button ink large button"
            href="{| ctrl.task.links.finish |}">Мои результаты тут</a>
     </div>
-    <div class="text-center">
+    <div class="text-center"
+         data-ng-if="!ctrl.isEscape">
         <a class="raised-button second small button"
-           data-ng-click="ctrl.escape()">
-            <div data-ng-if="!ctrl.isLoaded">
+           data-ng-click="ctrl.isEscape = true">
+            <div>
                 Завершить
             </div>
         </a>
+    </div>
+    <div class="text-center"
+         data-ng-if="ctrl.isEscape">
+        <section class="large-6 small-6 columns end">
+            <a class="raised-button alert small button"
+               data-ng-click="ctrl.escape()">
+                <div data-ng-if="!ctrl.isLoaded">
+                    Завершить
+                </div>
+            </a>
+        </section>
+        <section class="large-6 small-6 columns end">
+            <a class="raised-button second small button"
+               data-ng-click="ctrl.isEscape = false">
+                <div>
+                    Отмена
+                </div>
+            </a>
+        </section>
     </div>
 </div>

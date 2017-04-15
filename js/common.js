@@ -92,6 +92,7 @@ kubikApp.controller('taskCtrl', [
     '$http', '$location', '$scope', '$timeout', function ($http, $location, $scope, $timeout) {
         setInterval(this.checkSleep, 1000);
         this.finish = false;
+        this.isEscape = false;
         this.isLoaded = false;
         this.$scope = $scope;
         this.geolocationWork = true;
@@ -121,6 +122,12 @@ kubikApp.controller('taskCtrl', [
                     }.bind(this));
                 }.bind(this));
             }
+        };
+
+        this.escape = function () {
+            $http.get('https://api.kubikvest.xyz/escape?t=' + token).then(function (res) {
+                $location.path('list-quest');
+            }.bind(this));
         };
 
         this.checkSleep = function () {
