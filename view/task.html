@@ -25,11 +25,10 @@
     <div class="text-center">
         <div>{| ctrl.task.point.prompt.title |}</div>
         <h3>
-            <timer countdown="ctrl.task.countdownVal"
-                   interval="1000"
-                   finish-callback="ctrl.getTask()"
-                   autostart="false"
-                   data-ng-if="ctrl.task.countdownVal">{| mminutes |}:{| sseconds |}
+            <timer time="ctrl.task.countdownVal"
+                   finish="ctrl.getTask()"
+                   data-ng-if="ctrl.task.countdownVal">
+                {{ $ctrl.minutes }}:{{ $ctrl.seconds }}
             </timer>
         </h3>
     </div>
