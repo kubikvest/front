@@ -99,8 +99,9 @@ kubikApp.controller('taskCtrl', [
         this.geolocationErr = "";
         this.checkoutAttempt = 0;
         this.geolocationId = null;
-        this.error = {
-            msg: ""
+        this.notify = {
+            msg: "",
+            type: "success"
         };
         this.task = {
             countdownVal: 0
@@ -157,19 +158,26 @@ kubikApp.controller('taskCtrl', [
                     }*/
                 }, function (res) {
                     if (res.data) {
-                        this.error = res.data.error;
+                        this.notify = res.data.error;
+                        this.type = 'alert';
                     } else {
                         var msg = "Что-то пошло не так :(";
                         if (res.status >= 500) {
                             msg = "Нет связи с сервером :(";
                         }
-                        this.error = {
-                            msg: msg
+                        this.notify = {
+                            msg: msg,
+                            typ: 'alert'
                         };
                     }
                     this.isLoaded = false;
                 }.bind(this));
             }
+        };
+
+        this.sleep = function (ms) {
+            ms += new Date().getTime();
+            while (new Date() < ms){}
         };
 
         this.onPositionUpdate2 = function (position) {
@@ -193,10 +201,13 @@ kubikApp.controller('taskCtrl', [
                     pointid: this.task.point.pointId,
                     point_id: this.task.point.pointId
                 }).then(function (res) {
-                    console.log("Success checkout");
+                    this.notify = {
+                        msg: 'Отлично!',
+                        type: 'success'
+                    };
                     this.checkoutAttempt = 0;
                     this.downCheckoutAttempt();
-
+                    this.sleep(2000);
                     this.task = res.data;
                     this.point_id = this.task.point.point_id;
                     if (!this.task.finish) {
@@ -208,14 +219,16 @@ kubikApp.controller('taskCtrl', [
                 }.bind(this), function (res) {
                     this.downCheckoutAttempt();
                     if (res.data) {
-                        this.error = res.data.error;
+                        this.notify = res.data.error;
+                        this.type = 'alert';
                     } else {
                         var msg = "Что-то пошло не так :(";
                         if (res.status >= 500) {
                             msg = "Нет связи с сервером :(";
                         }
-                        this.error = {
-                            msg: msg
+                        this.notify = {
+                            msg: msg,
+                            type: 'alert'
                         };
                     }
                 }.bind(this));
@@ -226,7 +239,7 @@ kubikApp.controller('taskCtrl', [
             if (this.checkoutAttempt <= 0) {
                 navigator.geolocation.clearWatch(this.geolocationId);
                 this.isLoaded = false;
-                this.error = {};
+                this.notify = {};
                 this.checkoutAttempt = 0;
             } else {
                 this.checkoutAttempt--;
@@ -255,7 +268,7 @@ kubikApp.controller('taskCtrl', [
         };
 
         this.checkpoint = function () {
-            this.error = {};
+            this.notify = {};
             this.checkoutAttempt = 3;
 
             //var geolocation = ymaps.geolocation;
@@ -274,15 +287,16 @@ kubikApp.controller('taskCtrl', [
             this.requestCurrentPosition(
                 this.onPositionUpdate2.bind(this),
                 function (error) {
+                    this.notify.type = 'alert';
                     switch (error.code) {
                         case error.PERMISSION_DENIED:
-                            this.error.msg = "Вы нарочно запретили доступ к GPS :( 😉";
+                            this.notify.msg = "Вы нарочно запретили доступ к GPS :( 😉";
                             break;
                         case error.POSITION_UNAVAILABLE:
-                            this.error.msg = "Вы точно на пленете земля? 🚀";
+                            this.notify.msg = "Вы точно на пленете земля? 🚀";
                             break;
                         case error.TIMEOUT:
-                            this.error.msg = "Мне вас не найти :(";
+                            this.notify.msg = "Мне вас не найти :(";
                             break;
                     }
                     this.geolocationWork = false;
@@ -290,7 +304,8 @@ kubikApp.controller('taskCtrl', [
                     $scope.$applyAsync();
                 }.bind(this),
                 function () {
-                    this.error.msg = "Нет доступа к GPS :(";
+                    this.notify.msg = "Нет доступа к GPS :(";
+                    this.notify.type = 'alert';
                     this.geolocationWork = false;
                     this.isLoaded = false;
                     $scope.$applyAsync();
