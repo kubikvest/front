@@ -138,7 +138,9 @@ kubikApp.controller('taskCtrl', [
             if ($location.search().hasOwnProperty('t')) {
                 var token = $location.search()['t'];
                 $http.get('https://api.kubikvest.xyz/escape?t=' + token).then(function (res) {
-                    window.location = 'https://kubikvest.xyz/list-quest?t=' + token;
+                    if (res.data.links.list_quest) {
+                        window.location = res.data.links.list_quest;
+                    }
                 }.bind(this));
             }
         };
