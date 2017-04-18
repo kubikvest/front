@@ -10,7 +10,7 @@
              data-ng-repeat="quest in ctrl.quests">
         <figure>
             <a data-ng-click="ctrl.changeQuest(quest.quest_id)">
-                <img src="{| quest.picture |}" alt="{| quest.title |}">
+                <img data-ng-src="{| quest.picture |}" alt="{| quest.title |}">
             </a>
             <figcaption>
                 <a class="raised-button ink button large expanded"
