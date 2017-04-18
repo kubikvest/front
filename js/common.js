@@ -338,5 +338,9 @@ kubikApp.controller('taskCtrl', [
                     }.bind(this));
             }
         };
+
+        this.toUrl = function (link) {
+            window.location = link;
+        };
     }
 ]);

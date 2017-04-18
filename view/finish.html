@@ -5,7 +5,7 @@
             <p>Вы прошли за {| ctrl.task.time |}.</p>
             <div class="text-center">
                 <a class="raised-button ink large button"
-                   href="{| ctrl.task.links.list_quest |}">Вернуться к списку</a>
+                   data-ng-click="ctrl.toUrl(ctrl.task.links.list_quest)">Вернуться к списку</a>
             </div>
         </div>
     </section>
