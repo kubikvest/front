@@ -22,16 +22,6 @@
         <a class="raised-button ink large button"
            href="{| ctrl.task.links.checkpoint |}">Я на месте</a>
     </div>
-    <div class="text-center">
-        <div>{| ctrl.task.point.prompt.title |}</div>
-        <h3>
-            <timer time="ctrl.time"
-                   finish="ctrl.getTask()"
-                   data-ng-if="ctrl.task.countdownVal">
-                {| $ctrl.minutes |}:{| $ctrl.seconds |}
-            </timer>
-        </h3>
-    </div>
     <div class="text-center"
          data-ng-if="ctrl.task.point.prompt.description">
         <p data-ng-bind-html="ctrl.task.point.prompt.description"></p>
@@ -60,6 +50,16 @@
          data-ng-if="ctrl.task.finish">
         <a class="raised-button ink large button"
            href="{| ctrl.task.links.finish |}">Мои результаты тут</a>
+    </div>
+    <div class="text-center">
+        <div>{| ctrl.task.point.prompt.title |}</div>
+        <h3>
+            <timer time="ctrl.time"
+                   finish="ctrl.getTask()"
+                   data-ng-if="ctrl.task.countdownVal">
+                {| $ctrl.minutes |}:{| $ctrl.seconds |}
+            </timer>
+        </h3>
     </div>
     <div class="text-center"
          data-ng-if="!ctrl.isEscape">
