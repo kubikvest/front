@@ -3,7 +3,7 @@
          data-ng-if="ctrl.task.error">
         <p>{| ctrl.task.error |}</p>
         <h4 class="subheader">попытайтесь еще раз</h4>
-        <p>Не плакать!</p>
+        <p>Все получится!</p>
         <div class="text-center">
             <a class="raised-button ink large button"
                href="{| ctrl.task.links.task |}">Обратно к заданию</a>
@@ -18,7 +18,7 @@
         </div>
 
         <div data-ng-if="!ctrl.geolocationWork">
-            <h2 class="text-headline">Включите локацию!</h2>
+            <h2 class="text-headline">Включите геолокацию!</h2>
             <p>{| ctrl.geolocationErr |} По какой-то причине ваш браузер не передает вашу геолокацию.</p>
             <p>{| ctrl.task.geolocationErr |}</p>
             <div class="text-center">
@@ -29,7 +29,7 @@
 
         <div data-ng-if="ctrl.task.links.finish">
             <h2 class="text-headline">Поздравляем с успешным прохождением!</h2>
-            <p>Скажи что понравилось, а что нет, вместе сделаем игру лучше!</p>
+            <p>Делай селфи, ставь хештег #kubikvest!</p>
             <div class="text-center"
                  data-ng-if="ctrl.task.links.finish">
                 <a class="raised-button ink large button"
